@@ -1,5 +1,4 @@
-# general.import = [ "./tokyo-night.toml" ] 
- general.import = [ "./ayu_dark.toml" ]
+general.import = [ "./ayu_dark.toml" ]
 
 
 [[keyboard.bindings]]
@@ -46,7 +45,7 @@ family = "Maple Mono NF"
 style = "Regular"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [window]
 blur = true
