@@ -1,4 +1,6 @@
-general.import = [ "./tokyo-night.toml" ] 
+# general.import = [ "./tokyo-night.toml" ] 
+ general.import = [ "./ayu_dark.toml" ]
+
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -15,34 +17,11 @@ action = "ToggleFullscreen"
 key = "Return"
 mods = "Command"
 
-# [colors.bright]
-# black = "0x414868"
-# blue = "0x7aa2f7"
-# cyan = "0x7dcfff"
-# green = "0x9ece6a"
-# magenta = "0xbb9af7"
-# red = "0xf7768e"
-# white = "0xc0caf5"
-# yellow = "0xe0af68"
-
 [colors.cursor]
 cursor = "0xc0caf5"
 text = "0x1a1b26"
 
-# [colors.normal]
-# black = "0x15161e"
-# blue = "0x7aa2f7"
-# cyan = "0x7dcfff"
-# green = "0x9ece6a"
-# magenta = "0xbb9af7"
-# red = "0xf7768e"
-# white = "0xa9b1d6"
-# yellow = "0xe0af68"
 
-# [colors.primary]
-# background = "0x1a1b26"
-# foreground = "0xc0caf5"
-#
 [colors.selection]
 background = "0x33467c"
 text = "0xc0caf5"
@@ -71,7 +50,7 @@ hide_when_typing = true
 
 [window]
 blur = true
-opacity = 0.5
+opacity = 0.7
 decorations = "Buttonless"
 
 [window.padding]
