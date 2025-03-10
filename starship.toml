@@ -118,7 +118,7 @@ format = '[─](fg:current_line)[](fg:blue)[ ](fg:primary bg:blue)[](fg
 unknown_indicator = 'shell'
 powershell_indicator = 'powershell'
 fish_indicator = 'fish'
-disabled = false
+disabled =true 
 
 [time]
 format = '[─](fg:current_line)[](fg:purple)[󰦖 ](fg:primary bg:purple)[](fg:purple bg:box)[ $time](fg:foreground bg:box)[](fg:box)'

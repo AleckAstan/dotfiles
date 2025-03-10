@@ -47,5 +47,7 @@ eval "$(starship init zsh)"
 #Zoxide 
 eval "$(zoxide init zsh)"
 alias gmerge='git fetch origin && git merge origin'
+alias ta='tmux attach'
+alias td='tmux detach'
 # tmuxifier end
 export EDITOR=nvim

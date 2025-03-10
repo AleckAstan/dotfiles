@@ -36,6 +36,10 @@ size = 20.0
 family = "Maple Mono NF"
 style = "Bold"
 
+[font.offset]
+x = 0
+y = 1
+
 [font.italic]
 family = "Maple Mono NF"
 style = "Italic"
@@ -50,10 +54,10 @@ hide_when_typing = false
 [window]
 blur = true
 opacity = 0.7
-decorations = "Buttonless"
+decorations = "ButtonLess"
 
 [window.padding]
-x = 10
+x = 0
 y = 0
 
 
