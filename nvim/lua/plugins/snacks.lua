@@ -84,8 +84,8 @@ return {
       dashboard = {
         enabled = true,
         preset = {
-          header = nvimLogo,
-          -- header = logo,
+          -- header = nvimLogo,
+          header = logo,
         },
         sections = {
           { section = "header" },

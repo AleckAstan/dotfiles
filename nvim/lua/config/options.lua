@@ -3,4 +3,4 @@
 -- Add any additional options here
 vim.go.background = "dark"
 vim.opt.cursorline = true
-vim.cmd([[ highlight CursorLine guibg=NONE ctermbg=NONE ]])
+-- vim.cmd([[ highlight CursorLine guibg=NONE ctermbg=NONE ]])

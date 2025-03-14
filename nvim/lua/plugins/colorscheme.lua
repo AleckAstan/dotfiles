@@ -9,12 +9,15 @@ return {
   },
 }
 -- return {
---   "Shatur/neovim-ayu",
+--   "sainnhe/edge",
+--   lazy = false,
 --   priority = 1000,
 --   config = function()
---     require("ayu").setup({
---       mirage = true, -- Set to false for Ayu Light (true for Ayu Mirage)
---     })
---     vim.cmd("colorscheme ayu-light")
+--     vim.g.edge_enable_italic = true
+--     vim.g.edge_style = "aura"
+--     vim.g.edge_better_performance = 1
+--     vim.g.edge_transparent_background = 1
+--     vim.g.edge_spell_foreground = "colored"
+--     vim.cmd("colorscheme edge")
 --   end,
 -- }

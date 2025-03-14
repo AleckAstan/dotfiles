@@ -6,8 +6,18 @@
 -- Add any additional keymaps here
 -- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
 -- vim.keymap.set("n", "<leader>r", "<cmd>Neotree reveal<cr>", { desc = "Reveal file in Neo-tree" })
-vim.keymap.set("n", "<C-h>", "^", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-l>", "g_", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-h>", "0", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-h>", "0", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-l>", "$", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "$", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-j>", function()
+  require("mini.move").move_line("down")
+end, { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", function()
+  require("mini.move").move_line("up")
+end, { noremap = true, silent = true })
+
 local modes = { "i", "v", "n" }
 for _, mode in ipairs(modes) do
   vim.api.nvim_set_keymap(mode, "<Up>", "<Nop>", { noremap = true, silent = true })
