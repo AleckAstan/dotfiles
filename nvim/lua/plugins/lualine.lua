@@ -25,8 +25,8 @@ return {
       hide_in_width = function()
         return vim.fn.winwidth(0) > 80
       end,
-      check_git_workspace = function()
         local filepath = vim.fn.expand("%:p:h")
+      check_git_workspace = function()
         local gitdir = vim.fn.finddir(".git", filepath .. ";")
         return gitdir and #gitdir > 0 and #gitdir < #filepath
       end,
@@ -80,6 +80,15 @@ return {
 
     ins_left({
       function()
+        if vim.fn.mode() == "i" then
+          return " INSERT"
+        end
+        if vim.fn.mode() == "v" then
+          return " VISUAL"
+        end
+        if vim.fn.mode() == "n" then
+          return " NORMAL"
+        end
         return ""
       end,
       color = function()
