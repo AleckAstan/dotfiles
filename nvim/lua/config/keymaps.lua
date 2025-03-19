@@ -6,8 +6,10 @@
 -- Add any additional keymaps here
 -- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
 -- vim.keymap.set("n", "<leader>r", "<cmd>Neotree reveal<cr>", { desc = "Reveal file in Neo-tree" })
-vim.keymap.set("v", "<C-h>", "0", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-h>", "0", { noremap = true, silent = true })
+vim.keymap.del("n", "<C-j>")
+vim.keymap.del("n", "<C-k>")
+vim.keymap.set("v", "<C-h>", "g^", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-h>", "g^", { noremap = true, silent = true })
 vim.keymap.set("v", "<C-l>", "$", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "$", { noremap = true, silent = true })
 

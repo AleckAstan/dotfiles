@@ -9,8 +9,9 @@ local logo = [[
 	 █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████ 
 	░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░  
 	]]
-
 local nvimLogo = [[
+
+
           -%#.             -#:          
         -#@@@%:            -@@*:        
       -#@@@@@@@=           -@@@@*:      
@@ -32,7 +33,6 @@ local nvimLogo = [[
        .-+-#:            :%@@@#-        
          .-#.             .#%-          
 ]]
-
 logo = string.rep("\n", 4) .. logo .. "\n\n"
 nvimLogo = string.rep("\n", 4) .. nvimLogo .. "\n\n"
 
@@ -41,6 +41,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
     opts = {
       explorer = {
         enabled = true,
@@ -56,20 +57,30 @@ return {
           },
           explorer = {
             layout = {
+              preset = "default",
               layout = {
                 position = "right",
                 width = 0.2,
-                box = "vertical",
-                border = "none",
+                -- box = "vertical",
+                -- border = "none",
               },
+            },
+            actions = {
+              select = {
+                ["<CR>"] = "edit", -- Open file normally
+                ["<C-x>"] = "split", -- Open file in a horizontal split
+                ["<C-v>"] = "vsplit", -- Open file in a vertical split
+              },
+            },
+            files = {
+              hidden = true, -- show hidden files
+              follow = true,
+              ignored = true,
             },
           },
         },
         -------@class snacks.picker.layout.Config
         layout = {
-          layout = {
-            backdrop = true,
-          },
           preset = "telescope",
         },
         win = {
@@ -91,10 +102,10 @@ return {
           { section = "header" },
           { section = "keys", gap = 1, padding = 1 },
           { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+          section = "terminal",
           {
             icon = " ",
             title = "Git Status",
-            section = "terminal",
             enabled = function()
               return Snacks.git.get_root() ~= nil
             end,

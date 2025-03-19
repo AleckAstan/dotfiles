@@ -1,1 +1,3 @@
-return { "kosayoda/nvim-lightbulb" }
+if true then
+  return {}
+end
