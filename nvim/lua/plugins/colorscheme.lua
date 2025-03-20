@@ -1,126 +1,41 @@
--- return {
---   "navarasu/onedark.nvim",
---   config = function()
---     require("onedark").setup({
---       -- Main options --
---       style = "dark",
---       styles = {
---         sidebars = "transparent",
---       },
---       transparent = true,
---       term_colors = true,
---       ending_tildes = false,
---       cmp_itemkind_reverse = false,
---       code_style = {
---         comments = "italic",
---         keywords = "italic",
---         functions = "none",
---         strings = "none",
---         variables = "none",
---       },
---
---       lualine = {
---         transparent = true,
---       },
---
---       colors = {},
---       highlights = {},
---
---       diagnostics = {
---         darker = true,
---         undercurl = true,
---         background = true,
---       },
---     })
---   end,
--- }
 return {
-  "folke/tokyonight.nvim",
-  opts = {
-    transparent = true,
-    styles = {
-      sidebars = "transparent",
-      floats = "transparent",
-    },
-  },
+	"catppuccin/nvim",
+	name = "catppuccin",
+	priority = 1000, -- Ensure it loads first
+	config = function()
+		require("catppuccin").setup({
+			flavour = "mocha", -- Options: latte, frappe, macchiato, mocha
+			-- transparent_background = true,
+			term_colors = true,
+			comments = { "italic" }, -- Change the style of comments
+			styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+				conditionals = { "italic" },
+				loops = { "italic" },
+				functions = {},
+				keywords = { "italic" },
+				strings = {},
+				variables = {},
+				numbers = {},
+				booleans = { "italic" },
+				properties = {},
+				types = {},
+				operators = {},
+				-- miscs = {}, -- Uncomment to turn off hard-coded styles
+			},
+			integrations = {
+				treesitter = true,
+				native_lsp = { enabled = true },
+				cmp = true,
+				gitsigns = true,
+				telescope = true,
+				nvimtree = true,
+				indent_blankline = { enabled = true },
+				mini = {
+					enabled = true,
+					indentscope_color = "",
+				},
+			},
+		})
+		vim.cmd("colorscheme catppuccin")
+	end,
 }
--- return {
---   "folke/tokyonight.nvim",
---   config = function()
---     -- TokyoNight setup
---     require("tokyonight").setup({
---       style = "storm", -- Options: night, storm, day
---       transparent = true, -- Si tu veux un fond transparent
---       terminal_colors = true, -- Pour utiliser des couleurs dans le terminal
---       styles = {
---         sidebars = "transparent",
---         floats = "transparent",
---         comments = { italic = true }, -- Comme dans Catppuccin, rendre les commentaires en italique
---         keywords = { italic = true }, -- Rendre les mots-clés en italique
---         functions = {}, -- Garde les fonctions sans italique
---         strings = {}, -- Garde les chaînes sans italique
---         variables = {}, -- Garde les variables sans italique
---         numbers = {}, -- Garde les nombres sans italique
---         booleans = { italic = true }, -- Pour les booléens
---         types = { italic = true }, -- Pour les types
---         operators = {}, -- Les opérateurs sans italique
---       },
---     })
---     vim.cmd("colorscheme tokyonight")
---   end,
--- }
--- return {
---   "sainnhe/edge",
---   lazy = false,
---   priority = 1000,
---   config = function()
---     vim.g.edge_enable_italic = true
---     vim.g.edge_style = "aura"
---     vim.g.edge_better_performance = 1
---     vim.g.edge_transparent_background = 1
---     vim.g.edge_spell_foreground = "colored"
---     vim.cmd("colorscheme edge")
---   end,
--- }
-
--- return {
---   "catppuccin/nvim",
---   name = "catppuccin",
---   priority = 1000, -- Ensure it loads first
---   config = function()
---     require("catppuccin").setup({
---       flavour = "mocha", -- Options: latte, frappe, macchiato, mocha
---       transparent_background = true,
---       term_colors = true,
---       comments = { "italic" }, -- Change the style of comments
---       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
---         conditionals = { "italic" },
---         loops = { "italic" },
---         functions = {},
---         keywords = { "italic" },
---         strings = {},
---         variables = {},
---         numbers = {},
---         booleans = { "italic" },
---         properties = {},
---         types = {},
---         operators = {},
---         -- miscs = {}, -- Uncomment to turn off hard-coded styles
---       },
---       integrations = {
---         treesitter = true,
---         native_lsp = { enabled = true },
---         cmp = true,
---         gitsigns = true,
---         telescope = true,
---         nvimtree = true,
---         indent_blankline = { enabled = true },
---         mini = {
---           enabled = true,
---           indentscope_color = "",
---         },
---       },
---     })
---     -- vim.cmd("colorscheme catppuccin")
---   end,
--- }

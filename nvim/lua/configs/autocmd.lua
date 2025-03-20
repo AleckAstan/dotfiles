@@ -1,0 +1,6 @@
+-- augroup SetTabstopByFileType
+--   autocmd!
+--   autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+--   autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+--   autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+-- augroup END

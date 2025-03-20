@@ -51,3 +51,4 @@ alias ta='tmux attach'
 alias td='tmux detach'
 # tmuxifier end
 export EDITOR=nvim
+export NODE_OPTIONS="--max-old-space-size=8192"

@@ -1,12 +1,17 @@
 return {
-  "williamboman/mason-lspconfig.nvim",
-  -- overrides `require("mason-lspconfig").setup(...)`
-  opts = {
-    ensure_installed = {
-      "lua_ls",
-      "ts_ls",
-      "tailwindcss",
-      -- add more arguments for adding more language servers
-    },
-  },
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup({})
+		end,
+	},
+	{
+
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = { "lua_ls", "ts_ls" },
+			})
+		end,
+	},
 }
