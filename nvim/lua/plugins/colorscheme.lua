@@ -5,7 +5,7 @@ return {
 	config = function()
 		require("catppuccin").setup({
 			flavour = "mocha", -- Options: latte, frappe, macchiato, mocha
-			-- transparent_background = true,
+			transparent_background = true,
 			term_colors = true,
 			comments = { "italic" }, -- Change the style of comments
 			styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
