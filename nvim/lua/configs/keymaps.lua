@@ -13,6 +13,8 @@ vim.keymap.set("n", "<C-k>", function()
 	require("mini.move").move_line("up")
 end, { noremap = true, silent = true })
 
+vim.keymap.set("n", "<leader>lg", "<Cmd>LazyGit<CR>")
+
 vim.keymap.set("n", "<leader>cd", function()
 	vim.diagnostic.open_float(nil, { focus = true })
 end, { desc = "Show diagnostics in floating window" })

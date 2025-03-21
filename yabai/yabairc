@@ -1,5 +1,9 @@
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
+
+yabai -m config window_animation_duration 0.2
+yabai -m config window_animation_easing ease_out_cubic
+yabai -m config window_zoom_persist off
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
 
