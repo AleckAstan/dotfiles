@@ -37,7 +37,6 @@ return {
 					name = "vi_mode",
 					opts = {
 						show_mode_name = true,
-						-- padding = "center", -- Uncomment for extra padding.
 					},
 				},
 				hl = function()
@@ -51,19 +50,16 @@ return {
 			},
 			gitBranch = {
 				provider = "git_branch",
-				hl = {
-					fg = "peanut",
-				},
-				left_sep = " ",
-				right_sep = " ",
+				left_sep = "",
+				right_sep = "",
 			},
 			gitDiffAdded = {
 				provider = "git_diff_added",
 				hl = {
 					fg = "green",
 				},
-				left_sep = " ",
-				right_sep = " ",
+				left_sep = "",
+				right_sep = "",
 			},
 			gitDiffRemoved = {
 				provider = "git_diff_removed",
@@ -78,8 +74,8 @@ return {
 				hl = {
 					fg = "fg",
 				},
-				left_sep = " ",
-				right_sep = "right_filled",
+				left_sep = "",
+				right_sep = "",
 			},
 			separator = {
 				provider = "",
@@ -87,11 +83,10 @@ return {
 			fileinfo = {
 				provider = {
 					name = "file_info",
-					opts = {
-						type = "relative-short",
-					},
+					-- opts = {
+					-- 	type = "relative",
+					-- },
 				},
-				hl = {},
 				left_sep = " ",
 				right_sep = " ",
 			},
@@ -170,7 +165,6 @@ return {
 				},
 			},
 		}
-
 		local left = {
 			c.vim_mode,
 			c.gitBranch,
@@ -183,24 +177,14 @@ return {
 			c.diagnostic_warnings,
 			c.diagnostic_info,
 			c.diagnostic_hints,
+			-- c.lsp_client_names,
 		}
-
-		local right = {
-			c.lsp_client_names,
-			c.file_type,
-			c.file_encoding,
-			c.position,
-			c.line_percentage,
-		}
-
 		local components = {
 			active = {
 				left,
-				right,
 			},
 			inactive = {
 				left,
-				right,
 			},
 		}
 

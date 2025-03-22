@@ -14,6 +14,10 @@ vim.keymap.set("n", "<C-k>", function()
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>lg", "<Cmd>LazyGit<CR>")
+-- maintain current yanked to register
+vim.keymap.set("x", "<leader>p", '"_dP')
+
+vim.keymap.set("n", "<leader>rn", ":IncRename ")
 
 vim.keymap.set("n", "<leader>cd", function()
 	vim.diagnostic.open_float(nil, { focus = true })
