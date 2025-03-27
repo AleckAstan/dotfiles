@@ -1,0 +1,24 @@
+[flags]
+battery = true
+[styles]
+theme ="nord"
+
+[cpu]
+default = "average"
+[layouts]
+[[row]]
+    ratio=2
+    [[row.child]]
+      ratio=3
+      [[row.child.child]]
+        type="cpu"
+      [[row.child.child]]
+        type="memory"
+    [[row.child]]
+      ratio=3
+[[row.child.child]]
+ratio = 2
+      type="battery"
+[[row.child.child]]
+ratio = 8
+      type="proc"
