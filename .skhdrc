@@ -1,6 +1,6 @@
 # App shortcuts 
 alt - b : open -a 'Zen Browser'
-alt - t : open -a 'Alacritty'
+alt - t : open -a 'wezterm'
 
 # change window focus within space
 alt - j : yabai -m window --focus south

@@ -5,7 +5,6 @@ return {
 		if not line_ok then
 			return
 		end
-
 		local one_monokai = {
 			fg = "#abb2bf",
 			bg = "none",
@@ -52,6 +51,9 @@ return {
 				provider = "git_branch",
 				left_sep = "",
 				right_sep = "",
+				hl = {
+					fg = "peanut",
+				},
 			},
 			gitDiffAdded = {
 				provider = "git_diff_added",

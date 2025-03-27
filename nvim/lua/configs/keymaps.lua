@@ -1,11 +1,12 @@
 vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
 vim.keymap.del("n", "<C-j>")
 vim.keymap.del("n", "<C-k>")
-vim.keymap.set("v", "<C-h>", "g^", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-h>", "g^", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-h>", "^", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-h>", "^", { noremap = true, silent = true })
 vim.keymap.set("v", "<C-l>", "$", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "$", { noremap = true, silent = true })
 
+vim.keymap.set("n", "<leader>bd", "<Cmd>bd<CR>")
 vim.keymap.set("n", "<C-j>", function()
 	require("mini.move").move_line("down")
 end, { noremap = true, silent = true })
@@ -24,6 +25,12 @@ vim.keymap.set("n", "<leader>cd", function()
 end, { desc = "Show diagnostics in floating window" })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+-- console.log selection
+vim.api.nvim_set_keymap("v", "<leader>cl", '"zyoconsole.log("<C-R>z", <C-R>z);<Esc>', { noremap = true, silent = true })
+
+vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap-forward)")
+vim.keymap.set({ "n", "x", "o" }, "F", "<Plug>(leap-backward)")
+vim.keymap.set({ "n", "x", "o" }, "gf", "<Plug>(leap-from-window)")
 
 local modes = { "i", "v", "n" }
 for _, mode in ipairs(modes) do

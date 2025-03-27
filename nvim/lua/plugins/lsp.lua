@@ -4,8 +4,6 @@ return {
 		{ "williamboman/mason.nvim", opts = {} },
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-
-		{ "j-hui/fidget.nvim", opts = {} },
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
@@ -146,7 +144,45 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 		local servers = {
-			ts_ls = {},
+			-- ts_ls = {
+			-- 	enabled = false,
+			-- },
+			ts_ls = {
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				settings = {
+					complete_function_calls = true,
+					ts_ls = {
+						enableMoveToFileCodeAction = true,
+						autoUseWorkspaceTsdk = true,
+						experimental = {
+							completion = {
+								enableServerSideFuzzyMatch = true,
+							},
+						},
+					},
+					typescript = {
+						updateImportsOnFileMove = { enabled = "always" },
+						suggest = {
+							completeFunctionCalls = true,
+						},
+						inlayHints = {
+							enumMemberValues = { enabled = "all" },
+							functionLikeReturnTypes = { enabled = false },
+							parameterNames = { enabled = "all" }, -- Show parameter hints even for already passed arguments
+							parameterTypes = { enabled = "all" },
+							propertyDeclarationTypes = { enabled = true },
+							variableTypes = { enabled = true },
+						},
+					},
+				},
+			},
 			lua_ls = {
 				settings = {
 					Lua = {
