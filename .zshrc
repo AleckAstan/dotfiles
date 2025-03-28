@@ -52,3 +52,6 @@ alias td='tmux detach'
 # tmuxifier end
 export EDITOR=nvim
 export NODE_OPTIONS="--max-old-space-size=8192"
+
+# Created by `pipx` on 2025-03-28 19:23:55
+export PATH="$PATH:/Users/antsa/.local/bin"
