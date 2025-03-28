@@ -58,7 +58,4 @@ decorations = "ButtonLess"
 
 [window.padding]
 x = 25
-y = 5
-
-
-[keyboard]
+y = 15
