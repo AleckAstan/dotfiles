@@ -54,7 +54,7 @@ config.background = {
 	-- },
 	{
 		source = {
-			Color = "rgba(10, 14, 20, 0.4)",
+			Color = "rgba(10, 14, 20, 0.8)",
 			-- Color = "#0A0E14",
 		},
 		height = "100%",
