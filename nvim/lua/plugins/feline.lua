@@ -44,7 +44,6 @@ return {
 						name = "NeovimModeHLColor",
 					}
 				end,
-				left_sep = " ",
 				right_sep = " ",
 			},
 			gitBranch = {
