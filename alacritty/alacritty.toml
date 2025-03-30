@@ -1,11 +1,13 @@
-# general.import = ["./ayu_mirage.toml"]
-general.import = ["./edge_aura.toml"]
-
+# general.import = ["./ayu_dark.toml.toml"]
+# general.import = ["./edge_aura.toml"]
+general.import = [
+"tokyo-night.toml",
+]
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
-mods = "Command"
 
+mods = "Command"
 [[keyboard.bindings]]
 action = "Copy"
 key = "C"
@@ -30,7 +32,7 @@ blinking = "Always"
 shape = "Block"
 
 [font]
-size = 22.0
+size = 23.0
 
 [font.bold]
 family = "Cascadia Code NF"
@@ -41,8 +43,8 @@ x = 0
 y = 8
 
 [font.italic]
-family = "Cascadia Code NF"
-style = "SemiLight Italic"
+family = "Victor Mono"
+style = "Medium Italic"
 
 [font.normal]
 family = "Cascadia Code NF"
@@ -53,7 +55,7 @@ hide_when_typing = false
 
 [window]
 blur = true
-opacity =0.9
+opacity = 0.9
 decorations = "ButtonLess"
 
 [window.padding]
