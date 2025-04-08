@@ -1,3 +1,6 @@
+if true then
+	return {}
+end
 return {
 	"feline-nvim/feline.nvim",
 	config = function()

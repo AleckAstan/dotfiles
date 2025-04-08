@@ -1,3 +1,6 @@
+if true then
+	return {}
+end
 return {
 	"nvim-telescope/telescope.nvim",
 	event = "VimEnter",
@@ -33,21 +36,45 @@ return {
 					"--column",
 					"--smart-case",
 					"-u", -- thats the new thing
+					"-i",
+				},
+			},
+			pickers = {
+				find_files = {
+					find_command = { "rg", "--files", "-i", "--hidden", "-g", "!.git" },
+					layout_config = {
+						height = 0.70,
+					},
+				},
+				buffers = {
+					show_all_buffers = true,
+				},
+				live_grep = {
+					previewer = false,
+					theme = "dropdown",
 				},
 			},
 		})
 
 		-- Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
+		pcall(require("telescope").load_extension, "file_browser")
 		pcall(require("telescope").load_extension, "ui-select")
 
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+		vim.keymap.set(
+			"n",
+			"<leader>sf",
+			":lua require('telescope.builtin').find_files({ additional_args = function() return { '--hidden' } end })<cr>",
+			{ silent = true, desc = "[S]earch [F]iles" }
+		)
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+		vim.keymap.set(
+			"n",
+			"<leader>sg",
+			":lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden' } end })<cr>",
+			{ silent = true, desc = "Find in Files" }
+		)
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })

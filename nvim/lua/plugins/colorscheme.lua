@@ -1,76 +1,36 @@
 return {
-	"sainnhe/edge",
+	"sainnhe/everforest",
 	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.g.edge_enable_italic = true
-		vim.g.edge_cursor = "purple"
-		vim.g.edge_transparent_background = true
-		vim.g.edge_style = "aura"
-		vim.g.edge_diagnostic_text_highlight = true
-		vim.cmd.colorscheme("edge")
+		vim.g.everforest_enable_italic = true
+		vim.g.everforest_transparent_background = true
+		vim.g.everforest_diagnostic_text_highlight = true
+		vim.g.everforest_background = "hard"
+		vim.cmd.colorscheme("everforest")
 	end,
 }
 -- return {
--- 	"folke/tokyonight.nvim",
--- 	lazy = false,
--- 	opts = {},
--- 	priority = 1000,
+-- 	"Shatur/neovim-ayu",
 -- 	config = function()
--- 		require("tokyonight").setup({
--- 			style = "night",
--- 			transparent = true,
--- 			terminal_colors = true,
--- 			styles = {
--- 				comments = { italic = true },
--- 				keywords = { italic = true },
--- 				functions = { italic = true },
--- 				variables = { italic = true },
--- 				sidebars = "transparent", -- style for sidebars, see below
--- 				floats = "transparent", -- style for floating windows
+-- 		require("ayu").setup({
+-- 			terminal = true, -- Set to `false` to let terminal manage its own colors.
+-- 			overrides = {
+-- 				Normal = { bg = "None" },
+-- 				NormalFloat = { bg = "none" },
+-- 				ColorColumn = { bg = "None" },
+-- 				SignColumn = { bg = "None" },
+-- 				Folded = { bg = "None" },
+-- 				FoldColumn = { bg = "None" },
+-- 				CursorLine = { bg = "None" },
+-- 				CursorColumn = { bg = "None" },
+-- 				VertSplit = { bg = "None" },
+--
+-- 				-- font
+-- 				Keyword = { italic = true },
 -- 			},
 -- 		})
--- 		vim.cmd.colorscheme("tokyonight")
+-- 		vim.cmd.colorscheme("ayu-light")
 -- 	end,
 -- }
--- return {
--- 	"catppuccin/nvim",
--- 	name = "catppuccin",
--- 	priority = 1000, -- Ensure it loads first
--- 	config = function()
--- 		require("catppuccin").setup({
--- 			flavour = "mocha", -- Options: latte, frappe, macchiato, mocha
--- 			transparent_background = true,
--- 			term_colors = true,
--- 			comments = { "italic" }, -- Change the style of comments
--- 			styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
--- 				conditionals = { "italic" },
--- 				loops = { "italic" },
--- 				functions = {},
--- 				keywords = { "italic" },
--- 				strings = {},
--- 				variables = {},
--- 				numbers = {},
--- 				booleans = { "italic" },
--- 				properties = {},
--- 				types = {},
--- 				operators = {},
--- 				-- miscs = {}, -- Uncomment to turn off hard-coded styles
--- 			},
--- 			integrations = {
--- 				treesitter = true,
--- 				native_lsp = { enabled = true },
--- 				cmp = true,
--- 				gitsigns = true,
--- 				telescope = true,
--- 				nvimtree = true,
--- 				indent_blankline = { enabled = true },
--- 				mini = {
--- 					enabled = true,
--- 					indentscope_color = "",
--- 				},
--- 			},
--- 		})
--- 		vim.cmd("colorscheme catppuccin")
--- 	end,
--- }
+--

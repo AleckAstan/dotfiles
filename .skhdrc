@@ -1,6 +1,6 @@
 # App shortcuts 
-alt - b : open -a 'Zen Browser'
-alt - t : open -a 'Alacritty'
+alt - b : open -a 'Safari'
+alt - t : open -a 'WezTerm'
 alt - m : open -a 'Music'
 
 # change window focus within space

@@ -9,12 +9,8 @@ return {
 	opts = {
 		workspaces = {
 			{
-				name = "personal",
-				path = "/Volumes/PROJECTS/NOTES",
-			},
-			{
 				name = "work",
-				path = "/Volumes/PROJECTS/NOTES",
+				path = "/Volumes/PROJECTS/Obsidian/Documents/Work",
 			},
 		},
 	},
