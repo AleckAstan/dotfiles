@@ -3,16 +3,8 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		-- Snippet Engine & its associated nvim-cmp source
-		{
-			"L3MON4D3/LuaSnip",
-			build = (function()
-				if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-					return
-				end
-				return "make install_jsregexp"
-			end)(),
-			dependencies = {},
-		},
+		"L3MON4D3/LuaSnip",
+		"rafamadriz/friendly-snippets",
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
@@ -31,7 +23,9 @@ return {
 				end,
 			},
 			completion = { completeopt = "menu,menuone,noinsert" },
-
+			formatting = {
+				format = require("nvim-highlight-colors").format,
+			},
 			mapping = cmp.mapping.preset.insert({
 				-- Scroll the documentation window [b]ack / [f]orward
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -67,5 +61,6 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 			},
 		})
+		require("luasnip.loaders.from_vscode").lazy_load()
 	end,
 }

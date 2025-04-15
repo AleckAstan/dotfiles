@@ -37,6 +37,6 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
-yabai -m rule --add app="^Ableton Live 12 Suite$" manage=off
+yabai -m rule --add app="^Live$" manage=off
 
 # borders active_color=0xff008CFF  width=5.0 &

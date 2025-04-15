@@ -5,7 +5,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
-vim.o.background = "dark"
+vim.o.background = "light"
 
 vim.opt.wrap = false
 
@@ -25,10 +25,16 @@ vim.opt.number = true -- Show the current absolute line number
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand("~/.local/share/nvim/undo")
 
+function ToggleTheme()
+	if vim.o.background == "dark" then
+		vim.cmd("colorscheme ayu-light")
+	else
+		vim.cmd("colorscheme ayu-dark")
+	end
+end
+
 -- toggle background mode
-vim.api.nvim_create_user_command("ToggleBackground", function()
-	vim.o.background = vim.o.background == "dark" and "light" or "dark"
-end, {})
+vim.api.nvim_create_user_command("ToggleBackground", ToggleTheme, {})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -42,6 +48,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
 -- Load plugins from lua/plugins
 require("lazy").setup("plugins")
 require("configs.keymaps")

@@ -48,13 +48,6 @@ return {
 			require("mini.indentscope").setup()
 		end,
 	},
-	-- {
-	-- 	"echasnovski/mini.jump",
-	-- 	version = "*",
-	-- 	config = function()
-	-- 		require("mini.jump").setup()
-	-- 	end,
-	-- },
 	{
 
 		"echasnovski/mini.notify",

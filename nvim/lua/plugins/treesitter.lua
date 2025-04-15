@@ -7,6 +7,7 @@ return {
 				"toml",
 				"html",
 				"javascript",
+				"css",
 				"json",
 				"lua",
 				"markdown",
@@ -16,10 +17,11 @@ return {
 				"typescript",
 				"vim",
 				"tmux",
+				"rust",
 			},
 			highlight = { enable = true },
 			indent = { enable = true },
-			autotag = { enable = true },
+			-- autotag = { enable = true },
 		})
 	end,
 }

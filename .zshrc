@@ -50,9 +50,10 @@ alias gmerge='git fetch origin && git merge origin'
 alias ta='tmux attach'
 alias td='tmux detach'
 alias v='nvim'
+alias gcp='git cherry-pick'
 # tmuxifier end
 export EDITOR=nvim
 export NODE_OPTIONS="--max-old-space-size=8192"
-
+. "$HOME/.cargo/env" 
 # Created by `pipx` on 2025-03-28 19:23:55
 export PATH="$PATH:/Users/antsa/.local/bin"

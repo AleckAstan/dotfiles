@@ -5,7 +5,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "everforest",
+				-- theme = "ayu",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
@@ -24,20 +24,28 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = { {
-					"filename",
-					path = 1,
-				} },
-				lualine_x = { "location" },
+				lualine_b = { "branch", "diff" },
+				lualine_c = {},
+				lualine_x = {},
 				lualine_y = {},
 				lualine_z = {},
 			},
 			inactive_sections = {},
-			tabline = {},
-			winbar = {},
 			inactive_winbar = {},
-			extensions = {},
+			extensions = {
+				"quickfix",
+			},
+			tabline = {},
+			winbar = {
+				lualine_c = {
+					{
+						"filename",
+						path = 1,
+					},
+					"diagnostics",
+				},
+			},
 		})
+		vim.api.nvim_set_hl(0, "LualineCNormal", { bg = "none" })
 	end,
 }

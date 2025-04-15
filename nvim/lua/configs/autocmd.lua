@@ -5,3 +5,9 @@
 --   autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 -- augroup END
 --
+--
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
