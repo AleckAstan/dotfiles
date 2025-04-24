@@ -1,7 +1,8 @@
-theme = dark:ayu, light:OneHalfLight
+theme = dark:tokyonight_night, light:tokyonight-day
 font-family = "Cascadia Code NF"
 font-size = 25
 background-opacity = 0.9
 background-blur-radius = 40
-window-decoration=none
-
+macos-titlebar-style = "hidden"      
+window-decoration   = "auto"
+mouse-hide-while-typing = true
