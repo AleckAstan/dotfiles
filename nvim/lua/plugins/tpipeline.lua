@@ -1,6 +1,3 @@
-if true then
-	return {}
-end
 return {
 	"vimpostor/vim-tpipeline",
 	lazy = false, -- Load immediately

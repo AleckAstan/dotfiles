@@ -4,8 +4,8 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
+				theme = "onedark_dark",
 				icons_enabled = true,
-				-- theme = "ayu",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
