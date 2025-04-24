@@ -1,0 +1,7 @@
+theme = dark:ayu, light:OneHalfLight
+font-family = "Cascadia Code NF"
+font-size = 25
+background-opacity = 0.9
+background-blur-radius = 40
+window-decoration=none
+
