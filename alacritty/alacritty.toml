@@ -1,7 +1,5 @@
-# general.import = ["./ayu_dark.toml.toml"]
-# general.import = ["./edge_aura.toml"]
 general.import = [
-"tokyo-night.toml",
+"./ayu_dark.toml",
 ]
 [[keyboard.bindings]]
 action = "Paste"
@@ -19,45 +17,46 @@ key = "Return"
 mods = "Command"
 
 [colors.cursor]
-cursor = "0xc0caf5"
+cursor = "0xFF0000"
 text = "0x1a1b26"
 
 
 [colors.selection]
-background = "0x33467c"
-text = "0xc0caf5"
+background = "0x9a0000"
+text = "0x1a1b66"
 
 [cursor.style]
 blinking = "Always"
 shape = "Block"
 
 [font]
-size = 23.0
+size = 25.0
 
 [font.bold]
 family = "Cascadia Code NF"
-style = "Bold"
+style = "SemiBold"
 
 [font.offset]
 x = 0
 y = 8
 
 [font.italic]
-family = "Victor Mono"
-style = "Medium Italic"
+family = "Cascadia Code NF"
+style = "SemiLight Italic"
 
 [font.normal]
 family = "Cascadia Code NF"
-style = "Regular"
+style = "SemiLight"
 
 [mouse]
 hide_when_typing = false
 
 [window]
 blur = true
-opacity = 0.9
+opacity = 0.8
 decorations = "ButtonLess"
 
 [window.padding]
 x = 25
-y = 15
+y = 0
+
