@@ -1,6 +1,3 @@
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-sudo yabai --load-sa
-
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
 
@@ -8,37 +5,12 @@ yabai -m config layout bsp
 yabai -m config window_placement second_child
 
 
-# Query displays
-# yabai -m config --display 1 top_padding 10
-# yabai -m config --display 2 top_padding 50
 ## Status bar
 yabai -m config --dispaly 1 external_bar all:50:0
-# padding set to 12px
-# yabai -m config top_padding 15
 yabai -m config bottom_padding 25
 yabai -m config left_padding 25
 yabai -m config right_padding 0
 yabai -m config window_gap 15
-
-
-# ## Space - Browser
-# yabai -m rule --add space=1 label="Arc" app="^Arc$"
-#
-# ## Space - Development
-# yabai -m rule --add space=2 label="Alacritty" app="^Alacritty$"
-# yabai -m rule --add space=2 label="WezTerm" app="^WezTerm$"
-#
-# ## Space - Planning
-# yabai -m rule --add space=5 label="clickUp" app="^ClickUp$"
-# yabai -m rule --add space=5 label="Calendar" app="^Calendar$"
-# yabai -m rule --add space=5 label="Mail" app="^Mail$"
-#
-# ## Space - Communication
-# yabai -m rule --add space=4 label="Bitrix24 Messenger" app="^Bitrix24 Messenger$"
-# yabai -m rule --add space=4 label="Messenger" app="^Messenger$"
-#
-# ## Space - Music
-# yabai -m rule --add space=6 label="Music" app="^Music$"
 
 #### sketchybar
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus &> /dev/null"
@@ -58,11 +30,6 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^Live$" manage=off
-
-
-
-#### Events
-####################################################################################################
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa

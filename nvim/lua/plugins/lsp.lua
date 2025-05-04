@@ -144,9 +144,6 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 		local servers = {
-			-- ts_ls = {
-			-- 	enabled = false,
-			-- },
 			ts_ls = {
 				filetypes = {
 					"javascript",
@@ -157,28 +154,24 @@ return {
 					"typescript.tsx",
 				},
 				settings = {
-					complete_function_calls = true,
-					ts_ls = {
-						enableMoveToFileCodeAction = true,
-						autoUseWorkspaceTsdk = true,
-						experimental = {
-							completion = {
-								enableServerSideFuzzyMatch = true,
-							},
-						},
-					},
+					-- all the other stuff …
 					typescript = {
-						updateImportsOnFileMove = { enabled = "always" },
-						suggest = {
-							completeFunctionCalls = true,
-						},
 						inlayHints = {
-							enumMemberValues = { enabled = "all" },
-							functionLikeReturnTypes = { enabled = false },
-							parameterNames = { enabled = "all" }, -- Show parameter hints even for already passed arguments
-							parameterTypes = { enabled = "all" },
-							propertyDeclarationTypes = { enabled = true },
-							variableTypes = { enabled = true },
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+							includeInlayFunctionLikeReturnTypeHints = false,
+						},
+						updateImportsOnFileMove = { enabled = "always" },
+						suggest = { completeFunctionCalls = true },
+					},
+					javascript = { -- optional, if you also want hints in JS files
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 						},
 					},
 				},

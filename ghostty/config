@@ -1,8 +1,10 @@
-theme = dark:tokyonight_night, light:tokyonight-day
-font-family = "Cascadia Code NF"
-font-size = 25
-background-opacity = 0.9
+    theme = dark:OneHalfDark, light:OneHalfLight
+    font-family = "Cascadia Code NF"
+    font-size = 25
+    background-opacity = 0.9
 background-blur-radius = 40
 macos-titlebar-style = "hidden"      
 window-decoration   = "auto"
 mouse-hide-while-typing = true
+cursor-color = "#ff0000"
+cursor-text="#000000"

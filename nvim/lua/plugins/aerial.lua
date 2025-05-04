@@ -1,3 +1,6 @@
+if true then
+	return {}
+end
 return {
 	"stevearc/aerial.nvim",
 	opts = {},
