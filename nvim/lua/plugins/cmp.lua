@@ -61,6 +61,8 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 			},
 		})
-		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_vscode").load({
+			exclude = { "javascript" },
+		})
 	end,
 }
