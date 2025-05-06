@@ -97,10 +97,6 @@ return {
 					})
 				end
 
-				-- The following code creates a keymap to toggle inlay hints in your
-				-- code, if the language server you are using supports them
-				--
-				-- This may be unwanted, since they displace some of your code
 				if
 					client
 					and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
@@ -112,8 +108,6 @@ return {
 			end,
 		})
 
-		-- Diagnostic Config
-		-- See :help vim.diagnostic.Opts
 		vim.diagnostic.config({
 			severity_sort = true,
 			float = { border = "rounded", source = "if_many" },
@@ -153,6 +147,13 @@ return {
 					"typescriptreact",
 					"typescript.tsx",
 				},
+				init_options = {
+					preferences = {
+						includeCompletionsForModuleExports = true,
+						includeCompletionsForImportStatements = true,
+						importModuleSpecifierPreference = "non-relative",
+					},
+				},
 				settings = {
 					-- all the other stuff …
 					typescript = {
@@ -168,7 +169,7 @@ return {
 						updateImportsOnFileMove = { enabled = "always" },
 						suggest = { completeFunctionCalls = true },
 					},
-					javascript = { -- optional, if you also want hints in JS files
+					javascript = {
 						inlayHints = {
 							includeInlayParameterNameHints = "all",
 							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
