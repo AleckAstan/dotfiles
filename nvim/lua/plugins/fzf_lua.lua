@@ -24,11 +24,11 @@ return {
 		vim.keymap.set("n", "<leader>ss", require("fzf-lua").spell_suggest, { desc = "spelling suggestions" })
 		vim.keymap.set("n", "<leader>sc", require("fzf-lua").colorschemes, { desc = "spelling colorschemes" })
 		vim.keymap.set("n", "<leader><leader>", require("fzf-lua").buffers, { desc = "fzf buffers" })
-		vim.keymap.set(
-			"n",
-			"<leader>cd",
-			":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
-			{ desc = "document diagnostics" }
-		)
+		-- vim.keymap.set(
+		-- 	"n",
+		-- 	"<leader>cd",
+		-- 	":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
+		-- 	{ desc = "document diagnostics" }
+		-- )
 	end,
 }
