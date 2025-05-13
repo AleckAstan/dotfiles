@@ -1,0 +1,35 @@
+# default layout (can be bsp, stack or float)
+yabai -m config layout bsp
+
+# new window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
+
+## Status bar
+yabai -m config --dispaly 1 external_bar all:50:0
+yabai -m config bottom_padding 25
+yabai -m config left_padding 25
+yabai -m config right_padding 0
+yabai -m config window_gap 15
+
+#### sketchybar
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus &> /dev/null"
+yabai -m signal --add event=window_title_changed action="sketchybar --trigger title_change &> /dev/null" 
+# -- mouse settings --
+
+# center mouse on window with focus
+yabai -m config mouse_follows_focus on
+
+# when window is dropped in center of another window, swap them (on edges it will split it)
+
+yabai -m mouse_drop_action swap
+
+# disable specific apps
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^QuickTime Player$" manage=off
+yabai -m rule --add app="^Live$" manage=off
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa

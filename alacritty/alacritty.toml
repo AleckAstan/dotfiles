@@ -1,0 +1,62 @@
+general.import = [
+"./ayu_dark.toml",
+]
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+
+mods = "Command"
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "Return"
+mods = "Command"
+
+[colors.cursor]
+cursor = "0xFF0000"
+text = "0x1a1b26"
+
+
+[colors.selection]
+background = "0x9a0000"
+text = "0x1a1b66"
+
+[cursor.style]
+blinking = "Always"
+shape = "Block"
+
+[font]
+size = 25.0
+
+[font.bold]
+family = "Cascadia Code NF"
+style = "SemiBold"
+
+[font.offset]
+x = 0
+y = 8
+
+[font.italic]
+family = "Cascadia Code NF"
+style = "SemiLight Italic"
+
+[font.normal]
+family = "Cascadia Code NF"
+style = "SemiLight"
+
+[mouse]
+hide_when_typing = false
+
+[window]
+blur = true
+opacity = 0.8
+decorations = "ButtonLess"
+
+[window.padding]
+x = 25
+y = 0
+

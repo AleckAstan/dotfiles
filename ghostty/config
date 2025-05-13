@@ -1,0 +1,13 @@
+    theme = dark:catppuccin-macchiato, light:catppuccin-latte
+    font-family = "Cascadia Code NF"
+    font-size = 25
+    background-opacity = 0.9
+background-blur-radius = 40
+macos-titlebar-style = "hidden"      
+window-decoration   = "auto"
+mouse-hide-while-typing = true
+cursor-color = "#ff0000"
+cursor-text="#000000"
+window-padding-balance = true
+window-padding-x = 1
+window-padding-y = 0
