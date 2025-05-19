@@ -1,25 +1,77 @@
-return {
-	"sainnhe/edge",
-	lazy = false,
-	priority = 1000,
-	config = function()
-		vim.g.edge_enable_italic = true
-		vim.g.edge_transparent_background = true
-		vim.g.edge_style = "neon"
-		vim.g.edge_diagnostic_text_highlight = true
-		vim.cmd.colorscheme("edge")
-	end,
-}
 -- return {
--- 	"sainnhe/everforest",
+-- 	"ellisonleao/gruvbox.nvim",
+-- 	priority = 1000,
+-- 	config = true,
+-- 	config = function()
+-- 		-- Default options:
+-- 		require("gruvbox").setup({
+-- 			terminal_colors = true, -- add neovim terminal colors
+-- 			undercurl = true,
+-- 			underline = true,
+-- 			bold = true,
+-- 			italic = {
+-- 				strings = true,
+-- 				emphasis = true,
+-- 				comments = true,
+-- 				operators = false,
+-- 				folds = true,
+-- 			},
+-- 			strikethrough = true,
+-- 			invert_selection = false,
+-- 			invert_signs = false,
+-- 			invert_tabline = false,
+-- 			inverse = true, -- invert background for search, diffs, statuslines and errors
+-- 			contrast = "soft", -- can be "hard", "soft" or empty string
+-- 			dim_inactive = false,
+-- 			transparent_mode = true,
+-- 		})
+-- 		vim.cmd("colorscheme gruvbox")
+-- 	end,
+-- }
+-- return {
+-- 	"sainnhe/edge",
 -- 	lazy = false,
 -- 	priority = 1000,
 -- 	config = function()
--- 		vim.g.everforest_enable_italic = true
--- 		vim.g.everforest_transparent_background = true
--- 		vim.g.everforest_background = "hard"
--- 		vim.g.everforest_diagnostic_text_highlight = true
--- 		vim.cmd.colorscheme("everforest")
+-- 		vim.g.edge_enable_italic = true
+-- 		vim.g.edge_transparent_background = true
+-- 		vim.g.edge_style = "neon"
+-- 		vim.g.edge_diagnostic_text_highlight = true
+-- 		vim.cmd.colorscheme("edge")
+-- 	end,
+-- }
+return {
+	"sainnhe/everforest",
+	lazy = false,
+	priority = 1000,
+	config = function()
+		vim.g.everforest_enable_italic = true
+		vim.g.everforest_transparent_background = true
+		vim.g.everforest_background = "hard"
+		vim.g.everforest_diagnostic_text_highlight = true
+		vim.cmd.colorscheme("everforest")
+	end,
+}
+-- return {
+-- 	"Shatur/neovim-ayu",
+-- 	lazy = false,
+-- 	priority = 1000,
+-- 	config = function()
+-- 		require("ayu").setup({
+-- 			overrides = {
+-- 				Normal = { bg = "None" },
+-- 				NormalFloat = { bg = "none" },
+-- 				ColorColumn = { bg = "None" },
+-- 				SignColumn = { bg = "None" },
+-- 				Folded = { bg = "None" },
+-- 				FoldColumn = { bg = "None" },
+-- 				CursorLine = { bg = "None" },
+-- 				CursorColumn = { bg = "None" },
+-- 				VertSplit = { bg = "None" },
+-- 			},
+-- 		})
+-- 		vim.g.ayucolor = "dark"
+-- 		vim.cmd.colorscheme("ayu")
 -- 	end,
 -- }
 --

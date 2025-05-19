@@ -34,17 +34,16 @@ on-focus-changed = ['move-mouse window-lazy-center']
 # 2 = 'main'
 # 3 = 'V32UE'
 # 4 = 'V32UE'
-# 5 = 'V32UE'
+# 5 = 'V32UE':w
 # 6 = '^27W'
 # 7 = '^27W'
 # 10 = '^EPSON'
-
 [gaps]
     inner.horizontal = 20
     inner.vertical =   20
     outer.left =       20
-    outer.bottom =     20
-    outer.top =        20
+    outer.bottom =     0
+    outer.top = [{monitor.'^Retina' = 20}, {monitor.'^VA2962' = 50},20]
     outer.right =      20
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
@@ -160,7 +159,7 @@ alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 # run = ['layout floating']
 
 [[on-window-detected]]
-    if.window-title-regex-substring = '^BITRIX'
+    if.window-title-regex-substring = '^BITRIX24'
     run = "move-node-to-workspace 4"
 
 [[on-window-detected]]

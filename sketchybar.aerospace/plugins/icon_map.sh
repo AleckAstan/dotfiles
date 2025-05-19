@@ -198,7 +198,7 @@ function __icon_map() {
    "System Preferences" | "System Settings" | "系统设置" | "Réglages Système")
         icon_result=":gear:"
         ;;
-   "GitHub Desktop")
+   "GitHub Desktop"|"RelaGit")
         icon_result=":git_hub:"
         ;;
    "Godot")

@@ -35,4 +35,3 @@ sketchybar --add slider volume right            \
                                                 \
            --add item volume_icon right         \
            --set volume_icon "${volume_icon[@]}"
-

@@ -1,7 +1,7 @@
-    theme = dark:catppuccin-macchiato, light:catppuccin-latte
+    theme = dark:GruvBoxDark, light:ayu_light
     font-family = "Cascadia Code NF"
     font-size = 25
-    background-opacity = 0.9
+    background-opacity = 0.8
 background-blur-radius = 40
 macos-titlebar-style = "hidden"      
 window-decoration   = "auto"
