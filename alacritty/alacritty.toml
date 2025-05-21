@@ -41,12 +41,12 @@ x = 0
 y = 8
 
 [font.italic]
-family = "Cascadia Code NF"
-style = "SemiLight Italic"
+family = "MonoLisa"
+style = "Medium Italic"
 
 [font.normal]
-family = "Cascadia Code NF"
-style = "SemiLight"
+family = "MonoLisa"
+style = "Medium"
 
 [mouse]
 hide_when_typing = false

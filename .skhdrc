@@ -12,6 +12,12 @@ alt - l : yabai -m window --focus east
 # rotate layout clockwise
 shift + alt - r : yabai -m space --rotate 270
 
+# swap window
+shift+ alt - h : yabai -m window --warp west
+shift+ alt - l : yabai -m window --warp east
+shift+ alt - k : yabai -m window --warp north
+shift+ alt - j : yabai -m window --warp south
+
 # toggle window zoom
 alt - f : yabai -m window --toggle zoom-fullscreen
 

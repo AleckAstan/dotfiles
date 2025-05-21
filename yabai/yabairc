@@ -1,18 +1,31 @@
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
 # default layout (can be bsp, stack or float)
 yabai -m config layout bsp
 
 # new window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
-
+# Animation settings
+yabai -m config window_animation_duration    0.25
+yabai -m config window_animation_easing      ease_in_out_circ
+# EASING OPTIONS:= ease_in_sine  | ease_out_sine  | ease_in_out_sine  |
+#           ease_in_quad  | ease_out_quad  | ease_in_out_quad  |
+#           ease_in_cubic | ease_out_cubic | ease_in_out_cubic |
+#           ease_in_quart | ease_out_quart | ease_in_out_quart |
+#           ease_in_quint | ease_out_quint | ease_in_out_quint |
+#           ease_in_expo  | ease_out_expo  | ease_in_out_expo  |
+#           ease_in_circ  | ease_out_circ  | ease_in_out_circ
+yabai -m config auto_balance on
 
 ## Status bar
-yabai -m config --dispaly 1 external_bar all:50:0
+yabai -m config --display 1 external_bar all:50:0
 yabai -m config bottom_padding 25
 yabai -m config left_padding 25
 yabai -m config right_padding 0
 yabai -m config window_gap 15
 
-#### sketchybar
+#### sketchybar z
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus &> /dev/null"
 yabai -m signal --add event=window_title_changed action="sketchybar --trigger title_change &> /dev/null" 
 # -- mouse settings --
@@ -29,6 +42,3 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^Live$" manage=off
-
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-sudo yabai --load-sa

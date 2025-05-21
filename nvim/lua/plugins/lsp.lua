@@ -203,6 +203,7 @@ return {
 			"stylua",
 			"tailwindcss",
 			"css-lsp",
+			"prettier",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
