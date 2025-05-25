@@ -1,13 +1,12 @@
 theme = dark:GruvBoxDark, light:ayu_light
-
 font-family = "MonoLisa"
 font-style = "Medium"
 font-style-bold = "Bold"
 font-style-italic = "Medium Italic"
 font-style-bold-italic = "Bold Italic"
 font-size = 25
-font-feature=ss02,zero,ss08,ss07,ss09,frac
-background-opacity = 0.8
+font-feature=ss02,zero,ss08,ss07,ss09
+background-opacity = 0.9
 background-blur-radius = 40
 macos-titlebar-style = "hidden"      
 window-decoration   = "auto"

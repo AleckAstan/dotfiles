@@ -16,6 +16,9 @@ yabai -m config window_animation_easing      ease_in_out_circ
 #           ease_in_quint | ease_out_quint | ease_in_out_quint |
 #           ease_in_expo  | ease_out_expo  | ease_in_out_expo  |
 #           ease_in_circ  | ease_out_circ  | ease_in_out_circ
+yabai -m config window_opacity off
+yabai -m config active_window_opacity 0.80
+yabai -m config normal_window_opacity 0.80
 yabai -m config auto_balance on
 
 ## Status bar
