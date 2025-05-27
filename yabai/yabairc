@@ -6,6 +6,7 @@ yabai -m config layout bsp
 
 # new window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
+yabai -m config window_zoom_persist on
 # Animation settings
 yabai -m config window_animation_duration    0.25
 yabai -m config window_animation_easing      ease_in_out_circ

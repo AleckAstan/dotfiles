@@ -3,20 +3,29 @@ return {
 	"ibhagwan/fzf-lua",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		local actions = require("fzf-lua").actions
-		require("fzf-lua").setup({
+		local fzf = require("fzf-lua")
+		fzf.setup({
 			winopts = {
-				height = 0.9, -- 80% de la hauteur de l'écran
-				width = 1, -- 80% de la largeur de l'écran
+				height = 0.9,
+				width = 1,
 				preview = {
-					layout = "horizontal", -- 👈 pour avoir le preview à droite
-					horizontal = "right:60%", -- 👈 taille du panneau preview
+					layout = "horizontal",
+					horizontal = "right:60%",
 					scrollbar = false,
 					wrap = true,
 				},
 			},
 			files = {
-				previewer = "builtin", -- ou "builtin"
+				previewer = "builtin",
+				fd_opts = "--type f --hidden --exclude .git --exclude node_modules --exclude dist --exclude .next --strip-cwd-prefix",
+			},
+			grep = {
+				rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=512 --glob '!**/{.git,node_modules,dist,.next}/*'",
+			},
+			lsp = {
+				jump_to_single_result = true,
+				ignore_current_line = true,
+				include_declaration = false,
 			},
 		})
 		vim.keymap.set("n", "<leader>sf", require("fzf-lua").files, { desc = "fzf files" })
@@ -26,11 +35,13 @@ return {
 		vim.keymap.set("n", "<leader>ss", require("fzf-lua").spell_suggest, { desc = "spelling suggestions" })
 		vim.keymap.set("n", "<leader>sc", require("fzf-lua").colorschemes, { desc = "spelling colorschemes" })
 		vim.keymap.set("n", "<leader><leader>", require("fzf-lua").buffers, { desc = "fzf buffers" })
-		-- vim.keymap.set(
-		-- 	"n",
-		-- 	"<leader>cd",
-		-- 	":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
-		-- 	{ desc = "document diagnostics" }
-		-- )
+		vim.keymap.set("n", "<leader>gr", function()
+			fzf.lsp_references({ silent = true })
+		end, { desc = "[G]oto [R]eferences" })
+		vim.keymap.set("n", "gd", function()
+			require("fzf-lua").lsp_definitions({ silent = true })
+		end, { desc = "[G]oto [D]efinition" })
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
 	end,
 }
