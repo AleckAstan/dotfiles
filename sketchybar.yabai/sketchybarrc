@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
@@ -8,16 +9,6 @@ PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are st
 
 FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 PADDINGS=3 # All paddings use this value (icon, label, background)
-
-# aerospace setting
-AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
-AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-# Setting up and starting the helper process
-HELPER=git.felix.helper
-killall helper
-(cd $CONFIG_DIR/helper && make)
-$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
 
 # Unload the macOS on screen indicator overlay for volume change
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
@@ -34,7 +25,6 @@ bar=(
   topmost=window
 )
 
-sketchybar --bar "${bar[@]}"
 
 # Setting up default values
 defaults=(
@@ -56,23 +46,28 @@ defaults=(
   popup.background.color=$POPUP_BACKGROUND_COLOR
   popup.blur_radius=20
   popup.background.shadow.drawing=on
-
 )
 
-sketchybar --default "${defaults[@]}"
+sketchybar  --bar "${bar[@]}" --default "${defaults[@]}"
+
 
 
 # Left
 source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/yabai.sh"
 source "$ITEM_DIR/front_app.sh"
-#source "$ITEM_DIR/yabai.sh"
-
-
 # Right
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/calendarfr.sh"
 
-
+# sketchybar --add item separator right \
+#            --set separator icon.drawing=off \
+#                              label.drawing=off \
+#                              background.color="$TRANSLUCENT_WHITE" \
+#                              background.height=25 \
+#                              background.corner_radius=4 \
+#                              width=6
+ 
 sketchybar --add item whoami right
 sketchybar --set whoami label="Antsa Judicaël"
 
@@ -84,10 +79,22 @@ sketchybar --add item sep right \
                              background.corner_radius=4 \
                              width=6 
 
+sketchybar --add alias "TextInputMenuAgent,Item-0" right \
+           --set "TextInputMenuAgent,Item-0" padding_left=0 padding_right=0 label.width=0 update_freq=1
+
+source "$ITEM_DIR/media.sh"
 source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/volume.sh"
 
-sketchybar --hotload on
+
+# status_bracket=(
+#   background.color=$BACKGROUND_1
+#   background.border_color=$BACKGROUND_2
+# )
+
+# sketchybar --add bracket status "TextInputMenuAgent,Item-0" wifi battery github.bell volume_icon \
+#            --set status "${status_bracket[@]}"
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update

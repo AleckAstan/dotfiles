@@ -5,7 +5,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
-vim.o.background = "dark"
+vim.o.background = "light"
 
 vim.opt.wrap = false
 
@@ -42,6 +42,40 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- accent
+_G.accent_menu = function()
+	local line = vim.api.nvim_get_current_line()
+	local col = vim.fn.col(".") - 1
+	local last_char = "e"
+	local accents = {
+		["e"] = { "é", "è", "ê", "ë" },
+	}
+
+	local options = accents[last_char]
+	if not options then
+		vim.notify("Pas d'accents pour '" .. last_char .. "'", vim.log.levels.INFO)
+		return
+	end
+
+	local menu = {}
+	for i, a in ipairs(options) do
+		table.insert(menu, string.format("%d. %s", i, a))
+	end
+
+	local choice = vim.fn.inputlist(menu)
+	if choice >= 1 and choice <= #options then
+		local new_line = line:sub(1, col - 1) .. options[choice] .. line:sub(col + 1)
+		vim.api.nvim_set_current_line(new_line)
+		vim.api.nvim_win_set_cursor(0, { vim.fn.line("."), col })
+	end
+end
+
+-- Exemple de mapping
+vim.keymap.set("n", "<C-f>", function()
+	vim.cmd("lua accent_menu()")
+end, { desc = "Menu accents depuis insert mode" })
+-- accents
 -- Load plugins from lua/plugins
 require("lazy").setup("plugins")
 require("configs.keymaps")

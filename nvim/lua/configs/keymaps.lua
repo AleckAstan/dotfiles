@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
 vim.keymap.del("n", "<C-j>")
 vim.keymap.del("n", "<C-k>")
 vim.keymap.set("v", "<C-h>", "^", { noremap = true, silent = true })

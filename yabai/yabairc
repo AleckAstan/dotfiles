@@ -23,11 +23,11 @@ yabai -m config normal_window_opacity 0.80
 yabai -m config auto_balance on
 
 ## Status bar
-yabai -m config --display 1 external_bar all:50:0
-yabai -m config bottom_padding 25
-yabai -m config left_padding 25
-yabai -m config right_padding 0
-yabai -m config window_gap 15
+yabai -m config --display 1 external_bar all:25:0
+yabai -m config bottom_padding 35
+yabai -m config left_padding 35
+yabai -m config right_padding 15
+yabai -m config window_gap 25
 
 #### sketchybar z
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus &> /dev/null"

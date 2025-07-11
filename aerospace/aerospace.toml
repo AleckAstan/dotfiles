@@ -160,6 +160,7 @@ alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 
 [[on-window-detected]]
     if.window-title-regex-substring = '^BITRIX24'
+    
     run = "move-node-to-workspace 4"
 
 [[on-window-detected]]

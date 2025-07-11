@@ -1,6 +1,3 @@
-if true then
-	return {}
-end
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
@@ -35,7 +32,8 @@ return {
 				},
 			},
 			window = {
-				position = "right",
+				position = "float",
+				width = 20,
 				mappings = {
 					["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
 					["l"] = "focus_preview",
@@ -50,7 +48,15 @@ return {
 					hide_gitignored = false,
 				},
 				follow_current_file = {
-					enabled = true,
+					enabled = true, -- This enables following the currently open file
+					leave_dirs_open = false,
+				},
+			},
+			buffers = {
+				follow_current_file = {
+					enabled = true, -- This will find and focus the file in the active buffer every time
+					--              -- the current file is changed while the tree is open.
+					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 				},
 			},
 		})

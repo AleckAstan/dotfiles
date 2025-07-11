@@ -1,3 +1,10 @@
+local floating = {
+	height = 0.3,
+	width = 0.7,
+	preview = {
+		hidden = true,
+	},
+}
 return {
 	-- should install rg by running brew install rg
 	"ibhagwan/fzf-lua",
@@ -22,6 +29,12 @@ return {
 			grep = {
 				rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=512 --glob '!**/{.git,node_modules,dist,.next}/*'",
 			},
+			oldfiles = {
+				prompt = "Recent files❯ ",
+				cwd_only = true,
+				stat_file = true, -- verify files exist on disk
+				include_current_session = true, -- include bufs from current session
+			},
 			lsp = {
 				jump_to_single_result = true,
 				ignore_current_line = true,
@@ -34,6 +47,7 @@ return {
 		vim.keymap.set("n", "<leader>sr", require("fzf-lua").resume, { desc = "fzf resume" })
 		vim.keymap.set("n", "<leader>ss", require("fzf-lua").spell_suggest, { desc = "spelling suggestions" })
 		vim.keymap.set("n", "<leader>sc", require("fzf-lua").colorschemes, { desc = "spelling colorschemes" })
+		vim.keymap.set("n", "<leader>sh", require("fzf-lua").oldfiles, { desc = "fzf oldfiles" })
 		vim.keymap.set("n", "<leader><leader>", require("fzf-lua").buffers, { desc = "fzf buffers" })
 		vim.keymap.set("n", "<leader>gr", function()
 			fzf.lsp_references({ silent = true })
@@ -42,6 +56,10 @@ return {
 			require("fzf-lua").lsp_definitions({ silent = true })
 		end, { desc = "[G]oto [D]efinition" })
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
-		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+		vim.keymap.set("n", "<leader>ca", function()
+			require("fzf-lua").lsp_code_actions({
+				winopts = floating,
+			})
+		end, { desc = "[C]ode [A]ction" })
 	end,
 }

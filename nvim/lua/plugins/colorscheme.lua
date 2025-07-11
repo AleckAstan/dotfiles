@@ -61,34 +61,37 @@ return {
 					mantle = "#11111a",
 					crust = "#191926",
 				},
-
 				latte = {
-					rosewater = "#DC5E5E", -- dusty rose, vibrant but darker
-					flamingo = "#E26D6D", -- strong coral
-					pink = "#BA68F0", -- bold magenta-violet
-					mauve = "#FF7A29", -- vibrant tangerine
-					red = "#D94141", -- rich blood red
-					maroon = "#D75D6F", -- deep rose
-					peach = "#F89D4A", -- juicy readable peach
-					yellow = "#E7B441", -- golden amber
-					green = "#52B553", -- fresh green, darker for contrast
-					teal = "#2EBFAF", -- saturated sea green
-					sky = "#40AFFF", -- clear and legible blue
-					sapphire = "#369AEF", -- softened blue
-					blue = "#1A8FFF", -- strong readable azure
-					lavender = "#1FBACC", -- bright cyan-turquoise
-					text = "#2C2F42", -- dark slate for readable body text
-					subtext1 = "#44475E",
-					subtext0 = "#5E617A",
-					overlay2 = "#7A7D92",
-					overlay1 = "#A1A4B8",
-					overlay0 = "#C5C7D6",
-					surface2 = "#E2E4ED", -- subtle light gray-violet
-					surface1 = "#EBEDF2",
-					surface0 = "#F3F4F8",
-					base = "#F8F9FB", -- gentle off-white
-					mantle = "#F0F1F5",
-					crust = "#E6E7EC",
+					rosewater = "#DC6A60", -- moins rose que Macchiato, mais conserve chaleur
+					flamingo = "#E55A63",
+					pink = "#9B5DE5", -- similaire mais un peu plus doux
+					mauve = "#FF7B00", -- pour garder ce orange éclatant en light
+					red = "#D43C3C",
+					maroon = "#CC4C5D",
+					peach = "#F5973C",
+					yellow = "#E9AE30",
+					green = "#4CAF50",
+					teal = "#2FC9A3",
+					sky = "#38A7FF",
+					sapphire = "#2E90F2",
+					blue = "#008CE3",
+					lavender = "#009BB8",
+
+					-- TEXT & UI
+					text = "#2B2D3A", -- très foncé pour bon contraste
+					subtext1 = "#515561",
+					subtext0 = "#6D707A",
+					overlay2 = "#858892",
+					overlay1 = "#A3A6B1",
+					overlay0 = "#BFC2CD",
+
+					-- BACKGROUND
+					surface2 = "#EAEAEA", -- très léger mais distinct
+					surface1 = "#F2F2F5",
+					surface0 = "#FAFAFD",
+					base = "#FFFFFF", -- fond principal blanc pur
+					mantle = "#F5F6FA", -- pour les surfaces secondaires
+					crust = "#E6E8F0", -- pour les bordures/fond d’UI
 				},
 			},
 			highlight_overrides = {
@@ -162,7 +165,20 @@ return {
 				},
 			},
 		})
-
 		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.highlight("Visual ctermbg=Green guibg=LightGreen")
 	end,
 }
+
+-- return {
+-- 	"sainnhe/everforest",
+-- 	lazy = false,
+-- 	priority = 1000,
+-- 	config = function()
+-- 		vim.g.everforest_enable_italic = true
+-- 		vim.g.everforest_transparent_background = true
+-- 		vim.g.everforest_background = "hard"
+-- 		vim.g.everforest_diagnostic_text_highlight = true
+-- 		vim.cmd.colorscheme("everforest")
+-- 	end,
+-- }

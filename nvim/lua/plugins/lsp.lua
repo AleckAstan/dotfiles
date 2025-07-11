@@ -39,6 +39,11 @@ return {
 					return client.supports_method(method, { bufnr = bufnr })
 				end
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				-- Intégration avec nvim-lsp-file-operations
+				local status_ok, file_operations = pcall(require, "nvim-lsp-file-operations")
+				if status_ok then
+					file_operations.on_attach(client)
+				end
 				if
 					client
 					and client_supports_method(
@@ -216,6 +221,7 @@ return {
 			"css-lsp",
 			"prettier",
 			"vtsls",
+			-- "ts_ls",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

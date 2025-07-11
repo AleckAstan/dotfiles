@@ -3,7 +3,6 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		"L3MON4D3/LuaSnip",
-		"rafamadriz/friendly-snippets",
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
@@ -58,7 +57,6 @@ return {
 			sources = {
 				{
 					name = "lazydev",
-					group_index = 0,
 				},
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
@@ -66,8 +64,6 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 			},
 		})
-		require("luasnip.loaders.from_vscode").load({
-			exclude = { "javascript" },
-		})
+		require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/lua/snippets" })
 	end,
 }
