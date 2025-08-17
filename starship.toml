@@ -150,9 +150,8 @@ repo_root_style = "bold fg:color_directory"
 format = "[ $path ]($style)"
 read_only = " "
 home_symbol = "~"
-truncation_symbol = "…/"
-truncation_length = 5
-truncate_to_repo = false
+truncation_length = 1
+truncate_to_repo = true
 fish_style_pwd_dir_length = 0
 use_logical_path = true
 
