@@ -166,7 +166,6 @@ return {
 			},
 		})
 		vim.cmd.colorscheme("catppuccin")
-		vim.cmd.highlight("Visual ctermbg=Green guibg=LightGreen")
 	end,
 }
 

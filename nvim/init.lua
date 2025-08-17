@@ -79,3 +79,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 require("lazy").setup("plugins")
 require("configs.keymaps")
 require("configs.options")
+
+vim.cmd.highlight("Visual ctermbg=Green guibg=LightGreen")
