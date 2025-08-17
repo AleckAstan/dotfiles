@@ -145,20 +145,20 @@ return {
 			},
 
 			winbar = {
-				-- these are to remove the defaults
-				lualine_a = { { "filename", file_status = true, path = 1 } },
-				lualine_b = {
-					{
-						"diagnostics",
-						cond = conditions.buffer_not_empty,
-						color = { fg = colors.magenta, gui = "bold" },
-					},
-				},
-				lualine_y = {},
-				lualine_z = {},
-				-- These will be filled later
-				lualine_c = {},
-				lualine_x = {},
+				-- -- these are to remove the defaults
+				-- lualine_a = { { "filename", file_status = true, path = 1 } },
+				-- lualine_b = {
+				-- 	{
+				-- 		"diagnostics",
+				-- 		cond = conditions.buffer_not_empty,
+				-- 		color = { fg = colors.magenta, gui = "bold" },
+				-- 	},
+				-- },
+				-- lualine_y = {},
+				-- lualine_z = {},
+				-- -- These will be filled later
+				-- lualine_c = {},
+				-- lualine_x = {},
 			},
 			sections = {
 				-- these are to remove the defaults

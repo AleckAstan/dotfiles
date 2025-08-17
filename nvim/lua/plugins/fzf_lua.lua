@@ -59,6 +59,7 @@ return {
 		vim.keymap.set("n", "<leader>ca", function()
 			require("fzf-lua").lsp_code_actions({
 				winopts = floating,
+				silent = true,
 			})
 		end, { desc = "[C]ode [A]ction" })
 	end,

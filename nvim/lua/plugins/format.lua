@@ -10,6 +10,7 @@ return {
 				json = { "prettier" },
 				yaml = { "prettier" },
 				lua = { "stylua" },
+				swift = { "swiftformat" },
 			},
 			format_on_save = {
 				lsp_format = "fallback",

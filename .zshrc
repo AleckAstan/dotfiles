@@ -52,6 +52,7 @@ alias td='tmux detach'
 alias v='nvim'
 alias lg='lazygit'
 alias gcp='git cherry-pick'
+alias clearall='clear && printf "\e[3J"'
 # tmuxifier end
 export EDITOR=nvim
 export NODE_OPTIONS="--max-old-space-size=8192"

@@ -1,6 +1,5 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -32,14 +31,9 @@ return {
 				},
 			},
 			window = {
-				position = "float",
-				width = 20,
-				mappings = {
-					["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
-					["l"] = "focus_preview",
-					["<C-b>"] = { "scroll_preview", config = { direction = 10 } },
-					["<C-f>"] = { "scroll_preview", config = { direction = -10 } },
-				},
+				position = "current",
+				-- width = 20,
+				-- height = 80,
 			},
 			filesystem = {
 				filtered_items = {
@@ -50,13 +44,6 @@ return {
 				follow_current_file = {
 					enabled = true, -- This enables following the currently open file
 					leave_dirs_open = false,
-				},
-			},
-			buffers = {
-				follow_current_file = {
-					enabled = true, -- This will find and focus the file in the active buffer every time
-					--              -- the current file is changed while the tree is open.
-					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 				},
 			},
 		})
