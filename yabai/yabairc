@@ -25,10 +25,10 @@ yabai -m config window_opacity_duration 0.3
 
 ## Status bar
 yabai -m config --display 1 external_bar all:55:0
-yabai -m config bottom_padding 35
-yabai -m config left_padding 35
-yabai -m config right_padding 15
-yabai -m config window_gap 25
+yabai -m config bottom_padding 15
+yabai -m config left_padding 15
+yabai -m config right_padding 0
+yabai -m config window_gap 15
 
 #### sketchybar z
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus &> /dev/null"
@@ -47,4 +47,7 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Archive utility$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
-yabai -m rule --add app="^Live$" manage=off
+yabai -m rule --add app="^Arc$" space=1
+yabai -m rule --add app="^Ghostty$" space=2
+yabai -m rule --add app="^AFFiNE$" space=3
+#yabai -m rule --add app="^Live$" manage=off

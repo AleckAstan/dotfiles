@@ -10,46 +10,44 @@ end
 
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		-- return "Ayu Dark (Gogh)"
-		return "Everforest Dark Hard (Gogh)"
+		return "Ayu Dark (Gogh)"
+		-- return "Everforest Dark Hard (Gogh)"
 	else
-		return "Everforest Light Hard (Gogh)"
-		-- return "Ayu Light (Gogh)"
+		-- return "Everforest Light Hard (Gogh)"
+		return "Ayu Light (Gogh)"
 	end
 end
 
 ---Colorscheme
 config.color_scheme = scheme_for_appearance(get_appearance())
-
---- Font settings
+config.font = wezterm.font("MonoLisa", { weight = "Medium" })
 config.font_size = 25
-config.harfbuzz_features = { "calt", "liga", "clig", "dlig" }
-config.line_height = 0.9
-config.font_rules = {
-	{
-		intensity = "Normal",
-		italic = false,
-		font = wezterm.font({
-			italic = false,
-			family = "Cascadia Code NF",
-			weight = 500,
-		}),
-	},
-	{
-		intensity = "Normal",
-		italic = true,
-		font = wezterm.font({
-			family = "Cascadia Code NF",
-			-- family = "Victor Mono",
-			italic = true,
-			weight = 500,
-		}),
-	},
-}
+config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
+-- config.line_height = 0.9
+-- config.font_rules = {
+-- 	{
+-- 		intensity = "Normal",
+-- 		italic = false,
+-- 		font = wezterm.font({
+-- 			italic = false,
+-- 			family = "MonoLisa",
+-- 			-- weight = 500,
+-- 		}),
+-- 	},
+-- 	{
+-- 		intensity = "Normal",
+-- 		italic = true,
+-- 		font = wezterm.font({
+-- 			family = "MonoLisa",
+-- 			italic = true,
+-- 			-- weight = 500,
+-- 		}),
+-- 	},
+-- }
 
 --- Colors
 config.colors = {
-	cursor_bg = "red",
+	cursor_bg = "lightgreen",
 	cursor_border = "green",
 }
 

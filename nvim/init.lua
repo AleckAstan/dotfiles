@@ -76,6 +76,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- end, { desc = "Menu accents depuis insert mode" })
 -- accents
 -- Load plugins from lua/plugins
+--
+--
+
 require("lazy").setup("plugins")
 require("configs.keymaps")
 require("configs.options")

@@ -2,6 +2,7 @@ var NSApplicationPresentationAutoHideMenuBar = 1 << 2;
 var NSApplicationPresentationAutoHideDock = 1 << 0;
 var NSWindowStyleMaskBorderless = 0;
 var NSApplicationPresentationDefault = 0;
+var global = {};
 
 global.app = ObjC.classes.NSApplication.sharedApplication();
 

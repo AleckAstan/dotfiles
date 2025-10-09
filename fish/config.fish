@@ -27,9 +27,14 @@ set -gx PATH $PATH $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools
 set -gx PATH /usr/local/opt/ruby/bin /usr/local/lib/ruby/gems/3.1.0/bin $PATH
 set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
 
+# NVM
+set --global nvm_data ~/.nvm
+set --universal nvm_default_version v22.13.0
+
 # Tmuxifier
 # set -gx PATH $HOME/.tmuxifier/bin $PATH
 # tmuxifier init - | source
+
 
 # ALIASES
 alias ta='tmux attach'
@@ -38,4 +43,6 @@ alias v='nvim'
 alias lg='lazygit'
 alias g="git"
 alias gcp='git cherry-pick'
-alias clearall='clear; printf "\e[3J"'
+alias ca='clear; printf "\e[3J"'
+alias c='clear'
+alias gfa='git fetch --all'

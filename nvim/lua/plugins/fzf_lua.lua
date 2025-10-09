@@ -24,12 +24,35 @@ return {
 			},
 			files = {
 				previewer = "builtin",
+				winopts = {
+					height = 0.9,
+					width = 0.5,
+					preview = {
+						hidden = true,
+					},
+				},
 				fd_opts = "--type f --hidden --exclude .git --exclude node_modules --exclude dist --exclude .next --strip-cwd-prefix",
 			},
 			grep = {
 				rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=512 --glob '!**/{.git,node_modules,dist,.next}/*'",
 			},
+			buffers = {
+				winopts = {
+					height = 0.9,
+					width = 0.5,
+					preview = {
+						hidden = true,
+					},
+				},
+			},
 			oldfiles = {
+				winopts = {
+					height = 0.9,
+					width = 0.5,
+					preview = {
+						hidden = true,
+					},
+				},
 				prompt = "Recent files❯ ",
 				cwd_only = true,
 				stat_file = true, -- verify files exist on disk
