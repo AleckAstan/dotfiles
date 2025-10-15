@@ -1,3 +1,6 @@
+if true then
+	return {}
+end
 local floating = {
 	height = 0.3,
 	width = 0.7,
@@ -12,26 +15,32 @@ return {
 	config = function()
 		local fzf = require("fzf-lua")
 		fzf.setup({
-			winopts = {
-				height = 0.9,
-				width = 1,
-				preview = {
-					layout = "horizontal",
-					horizontal = "right:60%",
-					scrollbar = false,
-					wrap = true,
-				},
-			},
+			-- winopts = {
+			-- 	height = 0.9,
+			-- 	width = 1,
+			-- 	preview = {
+			-- 		layout = "horizontal",
+			-- 		horizontal = "right:60%",
+			-- 		scrollbar = false,
+			-- 		wrap = true,
+			-- 	},
+			-- },
 			files = {
 				previewer = "builtin",
-				winopts = {
-					height = 0.9,
-					width = 0.5,
-					preview = {
-						hidden = true,
-					},
-				},
 				fd_opts = "--type f --hidden --exclude .git --exclude node_modules --exclude dist --exclude .next --strip-cwd-prefix",
+				-- winopts = {
+				-- 	height = 0.9,
+				-- 	width = 0.6,
+				-- 	border = "rounded",
+				-- 	title = "   Find Files ",
+				-- 	title_pos = "center",
+				-- },
+			},
+			fzf_opts = {
+				["--prompt"] = "   ",
+				["--pointer"] = "",
+				["--marker"] = "✓",
+				["--layout"] = "reverse",
 			},
 			grep = {
 				rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=512 --glob '!**/{.git,node_modules,dist,.next}/*'",

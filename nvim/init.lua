@@ -78,9 +78,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Load plugins from lua/plugins
 --
 --
-
 require("lazy").setup("plugins")
 require("configs.keymaps")
 require("configs.options")
+require("configs.telescope-style")
 
-vim.cmd.highlight("Visual ctermbg=Green guibg=LightGreen")
+-- vim.cmd.highlight("Visual ctermbg=Green guibg=LightGreen")

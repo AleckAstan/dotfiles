@@ -10,11 +10,14 @@ end
 
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Ayu Dark (Gogh)"
+		return "Catppuccin Mocha"
+		-- return "Ef-Maris-Dark"
+		-- return "Ayu Dark (Gogh)"
 		-- return "Everforest Dark Hard (Gogh)"
 	else
+		return "Edge Light (base16)"
 		-- return "Everforest Light Hard (Gogh)"
-		return "Ayu Light (Gogh)"
+		-- return "Ayu Light (Gogh)"
 	end
 end
 
@@ -53,7 +56,7 @@ config.colors = {
 
 ---Appearance
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
 	left = 25,
@@ -66,4 +69,12 @@ config.macos_window_background_blur = 80
 -- Miscellaneous settings
 config.max_fps = 120
 config.prefer_egl = true
+
+config.front_end = "WebGpu"
+
+config.scrollback_lines = 5000
+
+config.check_for_updates = false
+
+config.enable_wayland = false
 return config
