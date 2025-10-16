@@ -48,6 +48,7 @@ yabai -m rule --add app="^Archive utility$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^Arc$" space=1
+yabai -m rule --add app="^Dia$" space=1
 yabai -m rule --add app="^Ghostty$" space=2
 yabai -m rule --add app="^AFFiNE$" space=3
 #yabai -m rule --add app="^Live$" manage=off

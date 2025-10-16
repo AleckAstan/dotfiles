@@ -12,49 +12,107 @@ return {
 			end,
 		},
 		{ "nvim-telescope/telescope-ui-select.nvim" },
-
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 	},
 	config = function()
-		require("telescope").setup({
+		local telescope = require("telescope")
+		telescope.setup({
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
 				},
+				extensions = {
+					fzf = {
+						fuzzy = true, -- recherche floue rapide
+						override_generic_sorter = true, -- remplace le tri par défaut
+						override_file_sorter = true,
+						case_mode = "smart_case",
+					},
+				},
 			},
-			-- defaults = {
-			-- 	vimgrep_arguments = {
-			-- 		"rg",
-			-- 		"--color=never",
-			-- 		"--no-heading",
-			-- 		"--with-filename",
-			-- 		"--line-number",
-			-- 		"--column",
-			-- 		"--smart-case",
-			-- 		"-u",
-			-- 		"-i",
-			-- 	},
-			-- },
-			-- pickers = {
-			-- 	find_files = {
-			-- 		find_command = { "rg", "--files", "-i", "--hidden", "-g", "!.git" },
-			-- 	},
-			-- 	buffers = {
-			-- 		show_all_buffers = true,
-			-- 	},
-			-- 	live_grep = {
-			-- 		previewer = false,
-			-- 		theme = "dropdown",
-			-- 	},
-			-- },
+			defaults = {
+				path_display = { "truncate" },
+				vimgrep_arguments = {
+					"rg",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+					"--hidden", -- inclut les fichiers cachés
+					"--glob",
+					"!**/.git/*",
+					"--glob",
+					"!**/node_modules/*",
+					"--glob",
+					"!**/dist/*",
+					"--glob",
+					"!**/.cache/*",
+					"--glob",
+					"!**/build/*",
+					"--glob",
+					"!**/coverage/*",
+				},
+				file_ignore_patterns = {
+					"node_modules",
+					".git",
+					"dist",
+					".cache",
+					"build",
+					"coverage",
+				},
+			},
+			pickers = {
+				find_files = {
+					previewer = false,
+					-- 	find_command = {
+					-- 		"rg",
+					-- 		"--files",
+					-- 		"--hidden",
+					-- 		"--ignore",
+					-- 		"--glob",
+					-- 		"!**/.git/*",
+					-- 		"--glob",
+					-- 		"!**/node_modules/*",
+					-- 		"--glob",
+					-- 		"!**/dist/*",
+					-- 		"--glob",
+					-- 		"!**/.cache/*",
+					-- 		"--glob",
+					-- 		"!**/build/*",
+					-- 		"--glob",
+					-- 		"!**/coverage/*",
+					-- 	},
+					-- },
+					find_command = {
+						"fd",
+						"--type",
+						"f",
+						"--hidden",
+						"--exclude",
+						".git",
+						"--exclude",
+						"node_modules",
+						"--exclude",
+						"dist",
+						"--exclude",
+						".cache",
+						"--exclude",
+						"build",
+					},
+				},
+				buffers = {
+					show_all_buffers = true,
+				},
+				live_grep = {
+					previewer = true,
+				},
+			},
 		})
 
-		-- Enable Telescope extensions if they are installed
-		-- pcall(require("telescope").load_extension, "fzf")
-		-- pcall(require("telescope").load_extension, "file_browser")
-		-- pcall(require("telescope").load_extension, "ui-select")
-
-		require("telescope").load_extension("ui-select")
+		telescope.load_extension("ui-select")
+		telescope.load_extension("fzf")
 
 		local builtin = require("telescope.builtin")
 		vim.keymap.set(
@@ -79,22 +137,13 @@ return {
 		vim.keymap.set("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
-
-		-- LSP References
 		vim.keymap.set("n", "<leader>gr", function()
 			builtin.lsp_references()
 		end, { desc = "[G]oto [R]eferences" })
-
-		-- LSP Definitions
 		vim.keymap.set("n", "gd", function()
 			builtin.lsp_definitions()
 		end, { desc = "[G]oto [D]efinition" })
-
-		-- LSP Rename
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
-
-		-- LSP Code Actions (Telescope n'a pas de floating intégré par défaut comme fzf-lua)
-
 		vim.keymap.set(
 			"n",
 			"<leader>ca",

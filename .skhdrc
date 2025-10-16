@@ -1,10 +1,10 @@
 # overnotch
 fn - a  : sudo frida -q -l ~/dotfiles/overNotch.js -e "toggleFullScreen()" $(osascript -e 'tell application "System Events" to get unix id of first application process whose frontmost is true')
 # App shortcuts 
-alt - b : open -a 'Arc'
-alt - t : open -a 'WezTerm'
+alt - b : open -a 'Dia'
+alt - t : open -a 'kitty'
 alt - m : open -a 'Music'
-alt - w : open -a 'Arc'; open -a 'WezTerm'; open -a 'AFFiNE'
+alt - w : open -a 'Dia'; open -a 'kitty'; open -a 'AFFiNE'
 # change window focus within space
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north

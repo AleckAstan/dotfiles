@@ -31,7 +31,7 @@ return {
 				},
 			},
 			window = {
-				position = "right",
+				position = "current",
 				-- width = 20,
 				-- height = 80,
 			},
