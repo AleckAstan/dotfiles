@@ -1,3 +1,6 @@
+if true then
+	return {}
+end
 return {
 	"dmmulroy/ts-error-translator.nvim",
 	config = function()

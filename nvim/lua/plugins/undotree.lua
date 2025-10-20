@@ -1,3 +1,6 @@
+if true then
+	return {}
+end
 return {
 	"jiaoshijie/undotree",
 	dependencies = "nvim-lua/plenary.nvim",

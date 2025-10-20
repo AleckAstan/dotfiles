@@ -46,6 +46,7 @@ alias gcp='git cherry-pick'
 alias ca='clear; printf "\e[3J"'
 alias c='clear'
 alias gfa='git fetch --all'
+alias y='yabai --restart-service'
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

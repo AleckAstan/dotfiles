@@ -1,9 +1,6 @@
-if true then
-	return {}
-end
 local floating = {
-	height = 0.3,
-	width = 0.7,
+	height = 0.9,
+	width = 0.9,
 	preview = {
 		hidden = true,
 	},
@@ -15,26 +12,29 @@ return {
 	config = function()
 		local fzf = require("fzf-lua")
 		fzf.setup({
-			-- winopts = {
-			-- 	height = 0.9,
-			-- 	width = 1,
-			-- 	preview = {
-			-- 		layout = "horizontal",
-			-- 		horizontal = "right:60%",
-			-- 		scrollbar = false,
-			-- 		wrap = true,
-			-- 	},
-			-- },
+			winopts = {
+				height = 0.9,
+				width = 0.9,
+				preview = {
+					layout = "horizontal",
+					horizontal = "right:60%",
+					scrollbar = false,
+					wrap = true,
+				},
+			},
 			files = {
 				previewer = "builtin",
 				fd_opts = "--type f --hidden --exclude .git --exclude node_modules --exclude dist --exclude .next --strip-cwd-prefix",
-				-- winopts = {
-				-- 	height = 0.9,
-				-- 	width = 0.6,
-				-- 	border = "rounded",
-				-- 	title = "   Find Files ",
-				-- 	title_pos = "center",
-				-- },
+				winopts = {
+					height = 0.9,
+					width = 0.9,
+					border = "rounded",
+					title = "   Find Files ",
+					title_pos = "center",
+					preview = {
+						hidden = true,
+					},
+				},
 			},
 			fzf_opts = {
 				["--prompt"] = "   ",
@@ -48,7 +48,7 @@ return {
 			buffers = {
 				winopts = {
 					height = 0.9,
-					width = 0.5,
+					width = 0.9,
 					preview = {
 						hidden = true,
 					},
@@ -57,7 +57,7 @@ return {
 			oldfiles = {
 				winopts = {
 					height = 0.9,
-					width = 0.5,
+					width = 0.9,
 					preview = {
 						hidden = true,
 					},
