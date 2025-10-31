@@ -47,6 +47,7 @@ alias ca='clear; printf "\e[3J"'
 alias c='clear'
 alias gfa='git fetch --all'
 alias y='yabai --restart-service'
+alias gfa='git fetch -a'
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

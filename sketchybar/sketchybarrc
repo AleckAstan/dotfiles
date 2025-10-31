@@ -21,15 +21,17 @@ bar=(
   position=top
   sticky=on
   y_offset=5
-  margin=10
+  margin=20
   topmost=window
-  blur_radius=20
-  corner_radius=20
+  padding_left=$PADDINGS
+  padding_right=$PADDINGS
 )
 
 
 # Setting up default values
 defaults=(
+padding_left=10
+padding_right=10
   updates=when_shown
   icon.font="$FONT:Bold:14.0"
   icon.color=$ICON_COLOR
@@ -39,25 +41,28 @@ defaults=(
   label.color=$LABEL_COLOR
   label.padding_left=$PADDINGS
   label.padding_right=$PADDINGS
-  background.height=34
+  background.height=30
   background.corner_radius=8
   background.border_width=2
+  # background.padding_left=10
+  # background.padding_right=10
   popup.background.border_width=2
   popup.background.corner_radius=9
   popup.background.border_color=$POPUP_BORDER_COLOR
   popup.background.color=$POPUP_BACKGROUND_COLOR
-  popup.blur_radius=20
   popup.background.shadow.drawing=on
 )
 
 sketchybar  --bar "${bar[@]}" --default "${defaults[@]}"
 
-
-
 # Left
+sketchybar --add item apple.logo left                                                      \
+              --set apple.logo icon=􀣺                                                         \
+                               icon.font="SF Pro:Black:16.0"                                  \
+                               label.drawing=off                 
 source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/yabai.sh"
 source "$ITEM_DIR/front_app.sh"
+source "$ITEM_DIR/yabai.sh"
 # Right
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/calendarfr.sh"
@@ -74,14 +79,26 @@ sketchybar --add item sep right \
                              background.corner_radius=4 \
                              width=6 
 
-sketchybar --add alias "TextInputMenuAgent,Item-0" right \
-           --set "TextInputMenuAgent,Item-0" padding_left=0 padding_right=0 label.width=0 update_freq=1
-
-source "$ITEM_DIR/media.sh"
-source "$ITEM_DIR/battery.sh"
-source "$ITEM_DIR/wifi.sh"
+sketchybar --add alias "Control Center,Battery" right
 source "$ITEM_DIR/volume.sh"
+sketchybar --add alias "Control Center,WiFi" right
 
+
+sketchybar --add bracket spaces apple.logo '/space\..*/' front_app \
+           --set         spaces background.height=40 \
+                                background.color=$TRANSLUCENT_WHITE2 \
+                                 background.corner_radius=12 \
+                                 background.border_width=2 \
+                                 background.border_color=$TRANSLUCENT_WHITE1 \
+                                 blur_radius=20
+
+sketchybar --add bracket menu calendar calendarfr whoami sep volume battery "Control Center,WiFi" \
+           --set menu background.color=$TRANSLUCENT_WHITE2 \
+                                 background.corner_radius=12 \
+                                 background.height=40 \
+                                 background.border_width=2 \
+                                 background.border_color=$TRANSLUCENT_WHITE1 \
+                                 blur_radius=20
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update

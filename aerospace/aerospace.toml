@@ -175,3 +175,4 @@ alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 if.app-id = 'com.apple.weather'
 run = ['layout floating']
 
+

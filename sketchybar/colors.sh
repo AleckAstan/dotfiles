@@ -12,9 +12,11 @@ export MAGENTA=0xffc6a0f6
 export GREY=0xff939ab7
 export TRANSPARENT=0x00000000
 export TRANSLUCENT_WHITE=0x60ffffff
+export TRANSLUCENT_WHITE1=0x10ffffff
+export TRANSLUCENT_WHITE2=0x30ffffff
 
 # General bar colors
-export BAR_COLOR=0x603c3e4f
+export BAR_COLOR=0x00000000
 export BAR_BORDER_COLOR=0xff494d64 #0xa024273a
 export ICON_COLOR=$WHITE # Color of all icons
 export LABEL_COLOR=$WHITE # Color of all labels

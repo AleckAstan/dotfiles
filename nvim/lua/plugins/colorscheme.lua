@@ -179,16 +179,40 @@
 -- 		vim.cmd.colorscheme("everforest")
 -- 	end,
 -- }
+-- return {
+-- 	"sainnhe/edge",
+-- 	lazy = false,
+-- 	priority = 1000,
+-- 	config = function()
+-- 		vim.g.edge_better_performance = true
+-- 		vim.g.edge_style = "aura"
+-- 		vim.g.edge_enable_italic = true
+-- 		vim.g.edge_transparent_background = 2
+-- 		vim.g.edge_float_style = "none"
+-- 		vim.cmd.colorscheme("edge")
+-- 	end,
+-- }
 return {
-	"sainnhe/edge",
+	"folke/tokyonight.nvim",
 	lazy = false,
 	priority = 1000,
+	opts = {},
 	config = function()
-		vim.g.edge_better_performance = true
-		vim.g.edge_style = "aura"
-		vim.g.edge_enable_italic = true
-		vim.g.edge_transparent_background = 2
-		vim.g.edge_float_style = "none"
-		vim.cmd.colorscheme("edge")
+		require("tokyonight").setup({
+			style = "night",
+			light_style = "day",
+			transparent = true,
+			terminal_colors = true,
+			styles = {
+				comments = { italic = true },
+				keywords = { italic = true },
+				functions = {},
+				variables = {},
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		})
+
+		vim.cmd.colorscheme("tokyonight")
 	end,
 }
