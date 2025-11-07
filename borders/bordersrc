@@ -2,10 +2,12 @@
 
 options=(
 	style=round
-	width=10.0
+	width=5.0
 	hidpi=on
-    active_color='glow(0x80FFFFFF)'
-    inactive_color='glow(0x40FFFFFF)'
+    active_color='0x80FFFFFF'
+    inactive_color='0x20FFFFFF'
+    # active_color='glow(0x80FFFFFF)'
+    # inactive_color='glow(0x40FFFFFF)'
 	background_color=0x00000000
 )
 

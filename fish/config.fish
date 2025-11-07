@@ -29,7 +29,7 @@ set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
 
 # NVM
 set --global nvm_data ~/.nvm
-set --universal nvm_default_version v22.13.0
+# set --universal nvm_default_version v22.21.1
 
 # Tmuxifier
 # set -gx PATH $HOME/.tmuxifier/bin $PATH
