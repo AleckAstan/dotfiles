@@ -20,7 +20,7 @@ yabai -m config window_animation_easing     ease_in_out_expo
 yabai -m config window_opacity off
 yabai -m config active_window_opacity 1
 yabai -m config normal_window_opacity 0.70
-yabai -m config auto_balance on
+yabai -m config auto_balance off
 yabai -m config window_opacity_duration 0.3
 
 ## Status bar
@@ -36,7 +36,7 @@ yabai -m signal --add event=window_title_changed action="sketchybar --trigger ti
 # -- mouse settings --
 
 # center mouse on window with focus
-yabai -m config mouse_follows_focus on
+yabai -m config mouse_follows_focus off
 
 # when window is dropped in center of another window, swap them (on edges it will split it)
 

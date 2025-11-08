@@ -33,7 +33,7 @@ defaults=(
 padding_left=10
 padding_right=10
   updates=when_shown
-  icon.font="$FONT:Bold:14.0"
+  icon.font="$FONT:Bold:13.0"
   icon.color=$ICON_COLOR
   icon.padding_left=$PADDINGS
   icon.padding_right=$PADDINGS
@@ -44,8 +44,6 @@ padding_right=10
   background.height=30
   background.corner_radius=8
   background.border_width=2
-  # background.padding_left=10
-  # background.padding_right=10
   popup.background.border_width=2
   popup.background.corner_radius=9
   popup.background.border_color=$POPUP_BORDER_COLOR
@@ -79,9 +77,18 @@ sketchybar --add item sep right \
                              background.corner_radius=4 \
                              width=6 
 
-sketchybar --add alias "Control Center,Battery" right
-source "$ITEM_DIR/volume.sh"
-sketchybar --add alias "Control Center,WiFi" right
+# sketchybar --add alias "Control Center,Battery" right 
+source "$ITEM_DIR/cpu.sh" 
+# sketchybar --add alias "Control Center,WiFi" right 
+#
+
+sketchybar --add item sepa right \
+           --set sepa icon.drawing=off \
+                             label.drawing=off \
+                             background.color="$TRANSLUCENT_WHITE" \
+                             background.height=25 \
+                             background.corner_radius=4 \
+                             width=6 
 
 
 sketchybar --add bracket spaces apple.logo '/space\..*/' front_app \
@@ -92,7 +99,7 @@ sketchybar --add bracket spaces apple.logo '/space\..*/' front_app \
                                  background.border_color=$TRANSLUCENT_WHITE1 \
                                  blur_radius=20
 
-sketchybar --add bracket menu calendar calendarfr whoami sep volume battery "Control Center,WiFi" \
+sketchybar --add bracket menu calendar calendarfr whoami sep cpu "Control Center,WiFi" "Control Center,Battery"\
            --set menu background.color=$TRANSLUCENT_WHITE2 \
                                  background.corner_radius=12 \
                                  background.height=40 \
