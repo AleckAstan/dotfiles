@@ -9,45 +9,45 @@ FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 PADDINGS=3 # All paddings use this value (icon, label, background)
 
 # Unload the macOS on screen indicator overlay for volume change
-launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
+# launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
 
 # Setting up the general bar appearance of the bar
 bar=(
-  height=40
-  notch_display_height=40
-  color=$BAR_COLOR
-  shadow=off
-  position=top
-  sticky=on
-  y_offset=5
-  margin=20
-  topmost=window
-  padding_left=$PADDINGS
-  padding_right=$PADDINGS
+    height=40
+    notch_display_height=40
+    color=$BAR_COLOR
+    shadow=off
+    position=top
+    sticky=on
+    y_offset=5
+    margin=20
+    topmost=window
+    padding_left=$PADDINGS
+    padding_right=$PADDINGS
 )
 
 
 # Setting up default values
 defaults=(
-padding_left=10
-padding_right=10
-  updates=when_shown
-  icon.font="$FONT:Bold:13.0"
-  icon.color=$ICON_COLOR
-  icon.padding_left=$PADDINGS
-  icon.padding_right=$PADDINGS
-  label.font="$FONT:Semibold:13.0"
-  label.color=$LABEL_COLOR
-  label.padding_left=$PADDINGS
-  label.padding_right=$PADDINGS
-  background.height=30
-  background.corner_radius=8
-  background.border_width=2
-  popup.background.border_width=2
-  popup.background.corner_radius=9
-  popup.background.border_color=$POPUP_BORDER_COLOR
-  popup.background.color=$POPUP_BACKGROUND_COLOR
-  popup.background.shadow.drawing=on
+    padding_left=10
+    padding_right=10
+    updates=when_shown
+    icon.font="$FONT:Bold:13.0"
+    icon.color=$ICON_COLOR
+    icon.padding_left=$PADDINGS
+    icon.padding_right=$PADDINGS
+    label.font="$FONT:Semibold:13.0"
+    label.color=$LABEL_COLOR
+    label.padding_left=$PADDINGS
+    label.padding_right=$PADDINGS
+    background.height=30
+    background.corner_radius=8
+    background.border_width=2
+    popup.background.border_width=2
+    popup.background.corner_radius=9
+    popup.background.border_color=$POPUP_BORDER_COLOR
+    popup.background.color=$POPUP_BACKGROUND_COLOR
+    popup.background.shadow.drawing=on
 )
 
 sketchybar  --bar "${bar[@]}" --default "${defaults[@]}"
@@ -76,19 +76,10 @@ sketchybar --add item sep right \
                              background.corner_radius=4 \
                              width=6 
 
-# sketchybar --add alias "Control Center,Battery" right 
 source "$ITEM_DIR/cpu.sh" 
+# sketchybar --add alias "Control Center,Battery" right 
 # sketchybar --add alias "Control Center,WiFi" right 
 #
-
-sketchybar --add item sepa right \
-           --set sepa icon.drawing=off \
-                             label.drawing=off \
-                             background.color="$TRANSLUCENT_WHITE" \
-                             background.height=25 \
-                             background.corner_radius=4 \
-                             width=6 
-
 
 sketchybar --add bracket spaces apple.logo '/space\..*/' front_app \
            --set         spaces background.height=40 \
@@ -98,7 +89,7 @@ sketchybar --add bracket spaces apple.logo '/space\..*/' front_app \
                                  background.border_color=$TRANSLUCENT_WHITE1 \
                                  blur_radius=20
 
-sketchybar --add bracket menu calendar calendarfr whoami sep cpu "Control Center,WiFi" "Control Center,Battery"\
+sketchybar --add bracket menu calendar calendarfr whoami sep cpu \
            --set menu background.color=$TRANSLUCENT_WHITE2 \
                                  background.corner_radius=12 \
                                  background.height=40 \
