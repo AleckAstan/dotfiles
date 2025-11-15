@@ -5,6 +5,7 @@ set -gx NODE_OPTIONS "--max-old-space-size=8192"
 set -gx PATH $PATH "$HOME/.local/bin"
 set -gx PATH /opt/homebrew/bin $PATH
 
+
 # STARSHIP PROMPT
 starship init fish | source
 # config from https://github.com/smithumble/starship-cockpit
@@ -29,7 +30,8 @@ set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
 
 # NVM
 set --global nvm_data ~/.nvm
-# set --universal nvm_default_version v22.21.1
+set --universal nvm_default_version 22.21.1
+set --universal nvm_default_packages pnpm
 
 # Tmuxifier
 # set -gx PATH $HOME/.tmuxifier/bin $PATH

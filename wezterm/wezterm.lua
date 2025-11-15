@@ -2,23 +2,18 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 local function get_appearance()
-	if wezterm.gui then
-		return wezterm.gui.get_appearance()
-	end
-	return "Dark"
+    if wezterm.gui then
+        return wezterm.gui.get_appearance()
+    end
+    return "Dark"
 end
 
 local function scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "Catppuccin Mocha"
-		-- return "Ef-Maris-Dark"
-		-- return "Ayu Dark (Gogh)"
-		-- return "Everforest Dark Hard (Gogh)"
-	else
-		return "Edge Light (base16)"
-		-- return "Everforest Light Hard (Gogh)"
-		-- return "Ayu Light (Gogh)"
-	end
+    if appearance:find("Dark") then
+        return "Ef-Deuteranopia-Dark"
+    else
+        return "Edge Light (base16)"
+    end
 end
 
 ---Colorscheme
@@ -50,19 +45,19 @@ config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
 
 --- Colors
 config.colors = {
-	cursor_bg = "lightgreen",
-	cursor_border = "green",
+    cursor_bg = "lightgreen",
+    cursor_border = "green",
 }
 
 ---Appearance
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 1
+config.window_background_opacity = 0.8
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
-	left = 25,
-	right = 15,
-	top = 15,
-	bottom = 0,
+    left = 25,
+    right = 15,
+    top = 15,
+    bottom = 0,
 }
 config.macos_window_background_blur = 80
 

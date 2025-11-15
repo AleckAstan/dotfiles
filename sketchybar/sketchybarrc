@@ -77,6 +77,7 @@ sketchybar --add item sep right \
                              width=6 
 
 source "$ITEM_DIR/cpu.sh" 
+# source "$ITEM_DIR/ram.sh" 
 # sketchybar --add alias "Control Center,Battery" right 
 # sketchybar --add alias "Control Center,WiFi" right 
 #

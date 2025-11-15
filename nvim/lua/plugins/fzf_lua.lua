@@ -11,7 +11,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         local fzf = require("fzf-lua")
-
         fzf.register_ui_select()
         fzf.setup({
             winopts = {
@@ -92,12 +91,19 @@ return {
             fzf.lsp_definitions({ silent = true })
         end, { desc = "[G]oto [D]efinition" })
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
-        vim.keymap.set("n", "<leader>ca", fzf.lsp_code_actions, { desc = "[C]ode [A]ction" })
-        -- vim.keymap.set("n", "<leader>ca", function()
-        -- 	require("fzf-lua").lsp_code_actions({
-        -- 		winopts = floating,
-        -- 		silent = true,
-        -- 	})
-        -- end, { desc = "[C]ode [A]ction" })
+        vim.keymap.set("n", "<leader>ca", function()
+            fzf.lsp_code_actions({
+                winopts = {
+                    height = 0.7,
+                    width = 0.6,
+                    border = "rounded",
+                    title = "Lsp Code Actions",
+                    title_pos = "center",
+
+                },
+                previewer = false,
+                silent = true,
+            })
+        end, { desc = "[C]ode [A]ction" })
     end,
 }

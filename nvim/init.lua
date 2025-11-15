@@ -5,7 +5,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
-vim.o.background = "light"
+vim.o.background = "dark"
 
 vim.opt.wrap = false
 
@@ -20,27 +20,27 @@ vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 
 vim.opt.relativenumber = true -- Enable relative line numbers
-vim.opt.number = true -- Show the current absolute line number
+vim.opt.number = true         -- Show the current absolute line number
 -- undotree persists between sessions
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand("~/.local/share/nvim/undo")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		lazypath,
-	})
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- -- accent

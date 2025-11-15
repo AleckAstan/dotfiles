@@ -35,11 +35,5 @@ include current-theme.conf
 
 
 # Cursor colors
-# cursor            #00ff00
-# cursor_text_color #000000
-
-
-# BEGIN_KITTY_THEME
-# 1984 Light
-include current-theme.conf
-# END_KITTY_THEME
+cursor            #00ff00
+cursor_text_color #000000
