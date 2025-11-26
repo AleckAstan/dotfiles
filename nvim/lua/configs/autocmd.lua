@@ -7,7 +7,24 @@
 --
 --
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
+
+
+local function set_theme()
+    if vim.o.background == 'dark' then
+        vim.cmd.colorscheme('tokyonight')
+    else
+        vim.cmd.colorscheme('everforest')
+    end
+end
+
+vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = "background",
+    callback = function()
+        set_theme()
+    end,
+})
+set_theme()

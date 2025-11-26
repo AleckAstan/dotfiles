@@ -10,7 +10,8 @@ end
 
 local function scheme_for_appearance(appearance)
     if appearance:find("Dark") then
-        return "Ef-Deuteranopia-Dark"
+        -- return "Ef-Deuteranopia-Dark"
+        return "tokyonight"
     else
         return "Edge Light (base16)"
     end
@@ -51,7 +52,7 @@ config.colors = {
 
 ---Appearance
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.9
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
     left = 25,
