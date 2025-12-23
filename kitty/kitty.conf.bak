@@ -8,7 +8,7 @@ font_size        25.0
 font_features    MonoLisa +ss02 +zero +ss08 +ss07 +ss09
 font_features    "MonoLisa Bold" +ss02 +zero +ss08 +ss07 +ss09
 # Window
-background_opacity 0.8
+background_opacity 1
 background_blur 100
 hide_window_decorations titlebar-only
 hide_mouse_when_typing yes
@@ -35,5 +35,7 @@ include current-theme.conf
 
 
 # Cursor colors
-cursor            #00ff00
-cursor_text_color #000000
+# cursor            #00ff00
+# cursor_text_color #000000
+
+

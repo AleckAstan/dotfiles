@@ -15,7 +15,7 @@ volume_slider=(
 
 volume_icon=(
   click_script="$PLUGIN_DIR/volume_click.sh"
-  padding_left=3
+  padding_left=10
   icon=$VOLUME_100
   icon.width=0
   icon.align=left
@@ -24,8 +24,8 @@ volume_icon=(
   label.width=25
   label.align=left
   label.font="$FONT:Regular:14.0"
-  padding_right=3
-  padding_left=3
+  padding_right=10
+  padding_left=10
 )
 
 sketchybar --add slider volume right            \
@@ -35,4 +35,3 @@ sketchybar --add slider volume right            \
                                                 \
            --add item volume_icon right         \
            --set volume_icon "${volume_icon[@]}"
-

@@ -16,17 +16,17 @@
 #   ease_in_quint, ease_out_quint, ease_in_out_quint,
 #   ease_in_expo, ease_out_expo, ease_in_out_expo,
 #   ease_in_circ, ease_out_circ, ease_in_out_circ
-animate = false
-animation_duration = 0.3
+animate = true
+animation_duration = 1
+animation_easing = "ease_in_out_circ"
 animation_fps = 100.0
-animation_easing = "ease_in_out"
 
 # Space activation behavior
 # - If true, spaces start inactive (rift does not manage windows there)
 #   and you must toggle activation via a keybind (toggle_space_activated).
 # - If false, spaces are managed by default and you can disable specific ones.
 # Default is true; uncomment to change.
-#default_disable = false
+# default_disable = false
 
 # Mouse/Focus behavior
 # - focus_follows_mouse: moving the mouse into a window focuses it
@@ -42,19 +42,24 @@ mouse_hides_on_focus = true
 # Prevent certain apps from stealing focus/causing workspace switches
 # Provide bundle identifiers (e.g., "com.apple.Spotlight")
 # Examples:
-#   "com.apple.dock", "com.apple.systemuiserver", "com.apple.SecurityAgent",
-#   "com.raycast.macos", "com.apple.Spotlight"
-auto_focus_blacklist = []
+auto_focus_blacklist = [
+  "com.apple.dock", "com.apple.systemuiserver", "com.apple.SecurityAgent",
+  "com.raycast.macos", "com.apple.Spotlight"
+]
 
 # Run commands on start
 #
 # Tip: You can subscribe to rift events and trigger your own scripts. The command will
 # receive environment variables with context:
-#   RIFT_EVENT_TYPE            # "workspace_changed" | "windows_changed"
+#   RIFT_EVENT_TYPE            # "workspace_changed" | "windows_changed" | "window_title_changed"
 #   RIFT_WORKSPACE_ID          # workspace id
 #   RIFT_WORKSPACE_NAME        # workspace name
+#   RIFT_WORKSPACE_INDEX       # workspace index (window_title_changed only)
 #   RIFT_WINDOW_COUNT          # number of windows (windows_changed only)
 #   RIFT_WINDOWS               # comma-separated window ids (windows_changed only)
+#   RIFT_WINDOW_ID             # window id (window_title_changed only)
+#   RIFT_PREVIOUS_WINDOW_TITLE # previous title (window_title_changed only)
+#   RIFT_WINDOW_TITLE          # new title (window_title_changed only)
 #   RIFT_EVENT_JSON            # full JSON payload of the event
 #
 # Example (sketchybar integration):
@@ -93,9 +98,13 @@ default_orientation = "perpendicular"
 # Gap configuration
 # - outer: space between windows and screen edges
 # - inner: space between tiled windows
+# - per_display: optional display-specific overrides keyed by display UUID.
+#   When present, the values in a per-display override replace the defaults
+#   (you may override only `outer`, only `inner`, or both for a display).
+#   Use the display's UUID as the key (for example, from system profiler or via rift CLI).
 
 [settings.layout.gaps.outer]
-top = 70
+top = 30
 left = 25
 bottom = 25
 right = 25
@@ -104,12 +113,30 @@ right = 25
 horizontal = 20
 vertical = 20
 
+# Example per-display overrides:
+# Replace the quoted key with your display's UUID. Only specify values you want to override.
+# [settings.layout.gaps.per_display."11111111-2222-3333-4444-555555555555".outer]
+# top = 20
+# left = 20
+# bottom = 20
+# right = 20
+#
+# [settings.layout.gaps.per_display."11111111-2222-3333-4444-555555555555".inner]
+# horizontal = 8
+# vertical = 8
 [settings.ui.menu_bar]
 # enable menu bar workspace indicators
 enabled = true
 # if enabled, it will show all workspaces including empty ones. disabled because this
 # tends to take up too much room in the menubar and then is auto hidden by macos
 show_empty = false
+# choose between drawing every workspace or only the active workspace
+mode = "all"
+# when showing workspaces as labels ("index" or "name"), choose which label to render
+active_label = "index"
+# when displaying workspaces, choose whether to draw the layout preview or a set of labels
+# options are "layout" or "label"
+display_style = "label"
 
 [settings.ui.stack_line]
 # experimental stack line indicator (defaults to off)
@@ -117,7 +144,7 @@ enabled = false
 # in a horizontal stack where the line will be (top/bottom)
 horiz_placement = "top"
 # in a vertical stack where the line will be (left/right)
-vert_placement = "left"
+vert_placement = "right"
 # how thick the line indicator will be (in px) -- default 0 when disabled
 thickness = 0.0
 # spacing between the stack line and window edges (in px)
@@ -127,9 +154,9 @@ spacing = 0.0
 [settings.ui.mission_control]
 enabled = false
 # enable fade animation when entering/exiting mission control
-fade_enabled = false
+fade_enabled = true
 # native macos mission control fade is about 180ms
-fade_duration_ms = 180.0
+fade_duration_ms = 100.0
 
 # Trackpad gestures
 [settings.gestures]
@@ -167,11 +194,14 @@ drag_swap_fraction = 0.3
 # - preserve_focus_per_workspace: remember last focused window per workspace
 # - workspace_auto_back_and_forth: when enabled, if you try to switch to the same workspace
 #   that's already active, it will switch to the last workspace instead
+# - reapply_app_rules_on_title_change: if true, app rules are re-evaluated when a window's title changes
 enabled = true
 default_workspace_count = 7
 auto_assign_windows = true
 preserve_focus_per_workspace = true
 workspace_auto_back_and_forth = false
+reapply_app_rules_on_title_change = false
+
 
 # Default workspace to activate on startup (0-based index).
 # If omitted, defaults to 0 (first workspace). Must be less than default_workspace_count.
@@ -182,13 +212,8 @@ workspace_auto_back_and_forth = false
 # remaining workspaces are named "Workspace X".
 # Do not provide more names than default_workspace_count.
 workspace_names = [
-	"Browser Work",
-	"Terminal",
-    "Notes",
-    "Browser Perso"
-    "Fifth"
-    "Music"
-    "Office"
+	"browser",
+	"terminal"
 ]
 
 # App rules (automatic assignment)
@@ -205,6 +230,7 @@ workspace_names = [
 #   - workspace (integer, 0-based): target workspace index. If omitted or invalid, uses the active workspace.
 #     Alternatively, `workspace` may be a workspace name string to target by name.
 #   - floating (boolean): whether matched windows should float by default.
+#   - manage (boolean): whether Rift should manage the matching window. Set to false to ignore the window completely (default = true).
 #
 # Matching behavior (summary):
 #   1. All rules that match a window are evaluated.
@@ -270,7 +296,7 @@ comb1 = "Alt + Shift"
 # - Spacing is flexible: "Alt+Down" and "Alt + Down" are equivalent
 # - Key values map to commands (see list below)
 
-# ommands
+# Commands
 # - toggle_space_activated
 # - next_workspace / prev_workspace
 # - switch_to_workspace = N
@@ -283,6 +309,10 @@ comb1 = "Alt + Shift"
 # - stack_windows / unstack_windows / unjoin_windows
 # - toggle_focus_floating / toggle_window_floating / toggle_fullscreen
 # - resize_window_grow / resize_window_shrink
+# - move_mouse_to_display = N or UUID
+# - focus_display = { direction = "left"|"right"|"up"|"down" }
+# - focus_display = { index = N }
+# - focus_display = { uuid = "<display_uuid>" }
 # - debug / serialize / save_and_exit
 # - show_timing
 
@@ -298,48 +328,64 @@ comb1 = "Alt + Shift"
 "comb1 + K" = { move_node = "up" }
 "comb1 + L" = { move_node = "right" }
 
-"Alt + 0" = { switch_to_workspace = 0 }
 "Alt + 1" = { switch_to_workspace = 1 }
 "Alt + 2" = { switch_to_workspace = 2 }
 "Alt + 3" = { switch_to_workspace = 3 }
 "Alt + 4" = { switch_to_workspace = 4 }
 "Alt + 5" = { switch_to_workspace = 5 }
 "Alt + 6" = { switch_to_workspace = 6 }
+"Alt + 7" = { switch_to_workspace = 7 }
 
-"comb1 + 0" = { move_window_to_workspace = 0 }
 "comb1 + 1" = { move_window_to_workspace = 1 }
 "comb1 + 2" = { move_window_to_workspace = 2 }
 "comb1 + 3" = { move_window_to_workspace = 3 }
 "comb1 + 4" = { move_window_to_workspace = 4 }
 "comb1 + 5" = { move_window_to_workspace = 5 }
 "comb1 + 6" = { move_window_to_workspace = 6 }
+"comb1 + 7" = { move_window_to_workspace = 7 }
+#
+# "Alt + Tab" = "switch_to_last_workspace"
 
-"Alt + Tab" = "switch_to_last_workspace"
+# "Alt + Shift + Left" = { join_window = "left" }
+# "Alt + Shift + Right" = { join_window = "right" }
+# "Alt + Shift + Up" = { join_window = "up" }
+# "Alt + Shift + Down" = { join_window = "down" }
+# "Alt + Comma" = "toggle_stack"
+# "Alt + Slash" = "toggle_orientation"
+# "Alt + Ctrl + E" = "unjoin_windows"
 
-"Alt + Shift + Left" = { join_window = "left" }
-"Alt + Shift + Right" = { join_window = "right" }
-"Alt + Shift + Up" = { join_window = "up" }
-"Alt + Shift + Down" = { join_window = "down" }
-"Alt + Comma" = "toggle_stack"
-"Alt + Slash" = "toggle_orientation"
-"Alt + Ctrl + E" = "unjoin_windows"
-
-"Alt + Shift + Space" = "toggle_window_floating"
-"Alt + F" = "toggle_fullscreen"
-"Alt + Shift + F" = "toggle_fullscreen_within_gaps"
-"comb1 + Ctrl + Space" = "toggle_focus_floating" # briefly bring focus to floating window
+# "Alt + Shift + Space" = "toggle_window_floating"
+# "Alt + F" = "toggle_fullscreen"
+"Alt + F" = "toggle_fullscreen_within_gaps"
+# "Alt + Shift + F" = "toggle_fullscreen_within_gaps"
+# "comb1 + Ctrl + Space" = "toggle_focus_floating" # briefly bring focus to floating window
 
 # smartly resize windows
-"Alt + Shift + Equal" = "resize_window_grow"
-"Alt + Shift + Minus" = "resize_window_shrink"
+# "Alt + Shift + Equal" = "resize_window_grow"
+# "Alt + Shift + Minus" = "resize_window_shrink"
+
+# Move mouse cursor to display by index (0-based) or UUID
+# Examples:
+# "Alt + Shift + A" = { move_mouse_to_display = 0 }
+# "Alt + Shift + S" = { move_mouse_to_display = 1 }
+# "Alt + Shift + D" = { move_mouse_to_display = "e9a4f5a1-2f8b-45c1-9f4e-5a6b7c8d9e0f" }
+# Focus another display (direction/index/uuid)
+# "Alt + Shift + F" = { focus_display = { direction = "right" } }
+
+# Move a window to a display (by index, UUID, or direction)
+# "Alt + Ctrl + Up" = { move_window_to_display = { selector = "up" } }
+# "Alt + Ctrl + Down" = { move_window_to_display = { selector = "down" } }
+# "Alt + Ctrl + Left" = { move_window_to_display = { selector = "left" } }
+# "Alt + Ctrl + Right" = { move_window_to_display = { selector = "right" } }
+# "Alt + Ctrl + A" = { move_window_to_display = { selector = 0 } }
 
 # if mission control is enabled
 # this will show an exploded view of the windows in the active workspace
-# "Alt + Ctrl + Shift + M" = "show_mission_control_current"
+# "All + Shift + M" = "show_mission_control_current"
 # this will show the mission control view shown in the readme
-# "Alt + Ctrl + M" = "show_mission_control_all"
+"Alt + M" = "show_mission_control_all"
 
-"Alt + Shift + D" = "debug" # prints layout tree
+# "Alt + Shift + D" = "debug" # prints layout tree
 
-"Alt + Ctrl + S" = "serialize"
-"Alt + Ctrl + Q" = "save_and_exit"
+# "Alt + Ctrl + S" = "serialize"
+# "Alt + Ctrl + Q" = "save_and_exit"

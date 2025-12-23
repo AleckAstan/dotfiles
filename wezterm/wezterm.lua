@@ -22,29 +22,6 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 config.font = wezterm.font("MonoLisa", { weight = "Medium" })
 config.font_size = 25
 config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
--- config.line_height = 0.9
--- config.font_rules = {
--- 	{
--- 		intensity = "Normal",
--- 		italic = false,
--- 		font = wezterm.font({
--- 			italic = false,
--- 			family = "MonoLisa",
--- 			-- weight = 500,
--- 		}),
--- 	},
--- 	{
--- 		intensity = "Normal",
--- 		italic = true,
--- 		font = wezterm.font({
--- 			family = "MonoLisa",
--- 			italic = true,
--- 			-- weight = 500,
--- 		}),
--- 	},
--- }
-
---- Colors
 config.colors = {
     cursor_bg = "lightgreen",
     cursor_border = "green",
@@ -52,12 +29,12 @@ config.colors = {
 
 ---Appearance
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.9
+config.window_background_opacity = 1
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
     left = 25,
     right = 15,
-    top = 15,
+    top = 0,
     bottom = 0,
 }
 config.macos_window_background_blur = 80

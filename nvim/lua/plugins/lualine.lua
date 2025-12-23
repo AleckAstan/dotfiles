@@ -5,7 +5,6 @@ return {
         opts.options = {
             section_separators = { left = "", right = "" },
             component_separators = { left = "", right = "" },
-            theme = "edge",
         }
         opts.sections = opts.sections
             or {
