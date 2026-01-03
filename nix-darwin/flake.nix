@@ -41,11 +41,16 @@
                     pkgs.lazygit
 		    pkgs.starship
 		    pkgs.zoxide
+            pkgs.asdf-vm
                 ];
 
 
             system.primaryUser = "antsajudicael";
 
+
+users.users.antsajudicael = {
+  shell = pkgs.fish;
+};
             homebrew = {
                 enable = true;
 
@@ -63,9 +68,9 @@
             };
 
 
-            users.users.antsajudicael = {
-                shell = pkgs.fish;
-            };
+            # users.users.antsajudicael = {
+            #     shell = pkgs.fish;
+            # };
 
 
 system.defaults= {
@@ -94,6 +99,8 @@ WindowManager.StandardHideDesktopIcons= true;
 # Enable alternative shell support in nix-darwin.
             programs.fish.enable = true;
 
+
+environment.shells = [ pkgs.fish ];
 # Set Git commit hash for darwin-version.
             system.configurationRevision = self.rev or self.dirtyRev or null;
 
@@ -103,6 +110,7 @@ WindowManager.StandardHideDesktopIcons= true;
 
 # The platform the configuration will be used on.
             nixpkgs.hostPlatform = "aarch64-darwin";
+
         };
     in
     {

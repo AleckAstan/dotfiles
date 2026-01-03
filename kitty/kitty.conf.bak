@@ -39,3 +39,8 @@ include current-theme.conf
 # cursor_text_color #000000
 
 
+
+
+# BEGIN_KITTY_THEME
+# Ayu Light
+# END_KITTY_THEME

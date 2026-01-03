@@ -11,8 +11,22 @@ starship init fish | source
 # config from https://github.com/smithumble/starship-cockpit
 export STARSHIP_COCKPIT_MEMORY_USAGE_ENABLED=true
 
-fnm env --use-on-cd --shell fish | source
-eval "$(fnm env)"
+# fnm env --use-on-cd --shell fish | source
+# eval "$(fnm env)"
+
+# ASDF configuration code
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
 
 # ZOXIDE
 zoxide init fish | source
