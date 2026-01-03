@@ -60,6 +60,7 @@
             pkgs.asdf-vm
             pkgs.jq
             pkgs.fd
+            pkgs.eza
           ];
 
           system.primaryUser = "antsajudicael";
