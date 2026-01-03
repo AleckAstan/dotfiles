@@ -54,6 +54,9 @@
             pkgs.starship
             pkgs.zoxide
             pkgs.asdf-vm
+            pkgs.jq
+            pkgs.fd
+            pkgs.sketchybar
           ];
 
           system.primaryUser = "antsajudicael";
