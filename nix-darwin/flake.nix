@@ -15,11 +15,14 @@
             url = "github:homebrew/homebrew-cask";
             flake = false;
         };
-
+ asmvik-formulae = {
+    url = "github:asmvik/homebrew-formulae";
+    flake = false;
+  };
 
     };
 
-    outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask}:
+    outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, asmvik-formulae,home-manager}:
         let
         configuration = { pkgs, ... }: {
             nixpkgs.config.allowUnfree = true;
@@ -46,10 +49,16 @@
             homebrew = {
                 enable = true;
 
+
                 casks = [
                     "iina"
                         "the-unarchiver"
+			"raycast"
                 ];
+ brews = [
+    "yabai"
+    "skhd"
+  ];
                 onActivation.cleanup = "zap";
             };
 
@@ -58,6 +67,26 @@
                 shell = pkgs.fish;
             };
 
+
+system.defaults= {
+dock.autohide = true;
+dock.persistent-apps = [
+"${pkgs.kitty}/Applications/kitty.app"
+"/Applications/Zen.app"
+"/System/Applications/Music.app"
+];
+finder._FXSortFoldersFirst = true;
+finder.FXPreferredViewStyle = "clmv";
+finder.ShowPathbar = true;
+trackpad.Clicking = true;
+trackpad.TrackpadRightClick = true;
+loginwindow.GuestEnabled = false;
+# NSGlobalDomain."com.apple.swipescrolldirection" = true; 
+NSGlobalDomain._HIHideMenuBar = true;
+NSGlobalDomain.AppleICUForce24HourTime = true;
+NSGlobalDomain.AppleInterfaceStyle = "Dark";
+WindowManager.StandardHideDesktopIcons= true;
+};
 
 # Necessary for using flakes on this system.
             nix.settings.experimental-features = "nix-command flakes";
@@ -98,7 +127,8 @@
 # Optional: Declarative tap management
                         taps = {
                             "homebrew/homebrew-core" = homebrew-core;
-                            "homebrew/homebrew-cask" = homebrew-cask;
+    "homebrew/homebrew-cask" = homebrew-cask;
+"asmvik/homebrew-formulae" = asmvik-formulae;
                         };
 
 # Optional: Enable fully-declarative tap management
