@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "FelixKratz-formulae": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766486515,
+        "narHash": "sha256-YbpzO4TuFD8o7oZwy0uckI14z/UDaimqkipx25GlK6w=",
+        "owner": "FelixKratz",
+        "repo": "homebrew-formulae",
+        "rev": "018a7db2946bfb54dee6be66f962929075173ac7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FelixKratz",
+        "repo": "homebrew-formulae",
+        "type": "github"
+      }
+    },
     "asmvik-formulae": {
       "flake": false,
       "locked": {
@@ -155,6 +171,7 @@
     },
     "root": {
       "inputs": {
+        "FelixKratz-formulae": "FelixKratz-formulae",
         "asmvik-formulae": "asmvik-formulae",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",

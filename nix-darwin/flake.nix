@@ -19,7 +19,10 @@
       url = "github:asmvik/homebrew-formulae";
       flake = false;
     };
-
+    FelixKratz-formulae = {
+      url = "github:FelixKratz/homebrew-formulae";
+      flake = false;
+    };
   };
 
   outputs =
@@ -31,6 +34,7 @@
       homebrew-core,
       homebrew-cask,
       asmvik-formulae,
+      FelixKratz-formulae,
       home-manager,
     }:
     let
@@ -56,7 +60,6 @@
             pkgs.asdf-vm
             pkgs.jq
             pkgs.fd
-            pkgs.sketchybar
           ];
 
           system.primaryUser = "antsajudicael";
@@ -71,10 +74,12 @@
               "iina"
               "the-unarchiver"
               "raycast"
+              "font-hack-nerd-font"
             ];
             brews = [
               "yabai"
               "skhd"
+              "sketchybar"
             ];
             onActivation.cleanup = "zap";
           };
@@ -146,6 +151,7 @@
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
                 "asmvik/homebrew-formulae" = asmvik-formulae;
+                "FelixKratz/homebrew-formulae" = FelixKratz-formulae;
               };
 
               # Optional: Enable fully-declarative tap management
