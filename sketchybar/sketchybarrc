@@ -1,5 +1,4 @@
 #!/bin/bash
-
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 source "$CONFIG_DIR/icons.sh" # Loads all defined icons
 
@@ -7,36 +6,29 @@ ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
 PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
 
 FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-PADDINGS=3 # All paddings use this value (icon, label, background)
-
-# aerospace setting
-AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
-AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-# Setting up and starting the helper process
-HELPER=git.felix.helper
-killall helper
-(cd $CONFIG_DIR/helper && make)
-$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+PADDINGS=10 # All paddings use this value (icon, label, background)
 
 # Unload the macOS on screen indicator overlay for volume change
-launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
+# launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
 
 # Setting up the general bar appearance of the bar
+
 bar=(
     height=40
     notch_display_height=40
-    color=$BAR_COLOR
+    color=$TOKYO_NIGHT_BG
     shadow=off
     position=top
     sticky=on
-    y_offset=5
-    margin=20
+    # y_offset=5
+    # margin=10
     topmost=window
     padding_left=$PADDINGS
     padding_right=$PADDINGS
+    blur_radius=80
+    padding_left=10
+    padding_right=10
 )
-
 
 
 # Setting up default values
@@ -46,12 +38,12 @@ defaults=(
     updates=when_shown
     icon.font="$FONT:Bold:13.0"
     icon.color=$ICON_COLOR
-    icon.padding_left=$PADDINGS
-    icon.padding_right=$PADDINGS
+    # icon.padding_left=$PADDINGS
+    # icon.padding_right=$PADDINGS
     label.font="$FONT:Semibold:13.0"
     label.color=$LABEL_COLOR
-    label.padding_left=$PADDINGS
-    label.padding_right=$PADDINGS
+    label.padding_left=3
+    label.padding_right=3
     background.height=30
     background.corner_radius=8
     background.border_width=2
@@ -62,61 +54,57 @@ defaults=(
     popup.background.shadow.drawing=on
 )
 
-
-
 sketchybar  --bar "${bar[@]}" --default "${defaults[@]}"
 
 # Left
-sketchybar --add item apple.logo left                                                      \
-              --set apple.logo icon=􀣺                                                         \
-                               icon.font="SF Pro:Black:16.0"                                  \
-                               label.drawing=off                 
-
-# Left
+# sketchybar --add item apple.logo left                                                      \
+#               --set apple.logo icon=􀣺                                                         \
+#                                icon.font="SF Pro:Black:16.0"                                  \
+#                                label.drawing=off                 
 source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/front_app.sh"
-#source "$ITEM_DIR/yabai.sh"
-
-
+source "$ITEM_DIR/yabai.sh"
 # Right
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/calendarfr.sh"
 
-
 sketchybar --add item whoami right
 sketchybar --set whoami label="Antsa Judicaël"
 
-sketchybar --add item sep right \
-           --set sep icon.drawing=off \
-                             label.drawing=off \
-                             background.color="$TRANSLUCENT_WHITE" \
-                             background.height=25 \
-                             background.corner_radius=4 \
-                             width=6 
+source "$ITEM_DIR/system.sh"
 
-# source "$ITEM_DIR/battery.sh"
-# source "$ITEM_DIR/volume.sh"
+# source "$ITEM_DIR/ram.sh" 
+# sketchybar --add alias "Control Center,Battery" right 
+# sketchybar --add alias "Control Center,WiFi" right 
+#
+#
+#
+BRACKET_STYLE=(
+  background.height=30
+  background.color=$TOKYO_NIGHT_BG_DARK
+  background.corner_radius=10
+  # background.border_width=1
+  # background.border_color=$TOKYO_NIGHT_BORDER
+  blur_radius=20
+)
 
-source "$ITEM_DIR/cpu.sh" 
 
 
-sketchybar --add bracket spaces apple.logo '/space\..*/' front_app \
-           --set         spaces background.height=40 \
-                                background.color=$TRANSLUCENT_WHITE2 \
-                                 background.corner_radius=12 \
-                                 background.border_width=2 \
-                                 background.border_color=$TRANSLUCENT_WHITE1 \
-                                 blur_radius=20
+sketchybar --add bracket spaces  '/space\..*/' \
+           --set         spaces 
 
-sketchybar --add bracket menu calendar calendarfr whoami sep cpu tmux_item\
-           --set menu background.color=$TRANSLUCENT_WHITE2 \
-                                 background.corner_radius=12 \
-                                 background.height=40 \
-                                 background.border_width=2 \
-                                 background.border_color=$TRANSLUCENT_WHITE1 \
-                                 blur_radius=20
+sketchybar --add bracket f_app  front_app  \
+           --set         f_app "${BRACKET_STYLE[@]}" 
 
-sketchybar --hotload on
+sketchybar --add bracket system cpu mem \
+           --set system "${BRACKET_STYLE[@]}"
+
+sketchybar --add bracket calendar_menu calendar calendarfr\
+           --set calendar_menu "${BRACKET_STYLE[@]}"
+
+sketchybar --add bracket whoami_menu whoami \
+           --set whoami_menu "${BRACKET_STYLE[@]}"
+
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
