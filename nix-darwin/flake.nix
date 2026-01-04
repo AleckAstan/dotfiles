@@ -60,6 +60,7 @@
             pkgs.asdf-vm
             pkgs.jq
             pkgs.fd
+            pkgs.gh
           ];
 
           system.primaryUser = "antsajudicael";
@@ -75,6 +76,7 @@
               "the-unarchiver"
               "raycast"
               "font-hack-nerd-font"
+              "sf-symbols"
             ];
             brews = [
               "yabai"

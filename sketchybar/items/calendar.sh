@@ -1,13 +1,13 @@
 #!/bin/bash
 
 calendar=(
-  icon.font="$FONT:Black:12.0"
-  icon.padding_right=0
-  label.align=right
+  icon=cal
+  icon.font="$FONT:Bold:13.0"
+  label.font="$FONT:Bold:13.0"
   update_freq=30
   script="$PLUGIN_DIR/calendar.sh"
 )
+           sketchybar --add item calendar right       \
+               --set calendar "${calendar[@]}" \
+               --subscribe calendar system_woke
 
-sketchybar --add item calendar right       \
-           --set calendar "${calendar[@]}" \
-           --subscribe calendar system_woke
