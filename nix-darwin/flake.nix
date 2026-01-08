@@ -45,6 +45,7 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
+            pkgs.obsidian
             pkgs.nixfmt-rfc-style
             pkgs.btop
             pkgs.git
@@ -61,6 +62,7 @@
             pkgs.jq
             pkgs.fd
             pkgs.eza
+            pkgs.fastfetch
             pkgs.gh
           ];
 
@@ -78,12 +80,18 @@
               "raycast"
               "font-hack-nerd-font"
               "sf-symbols"
+              "pearcleaner"
+              "onlyoffice"
             ];
             brews = [
               "yabai"
               "skhd"
               "sketchybar"
+              "mas"
             ];
+            masApps = {
+              "CleanMyKeyboard" = 6468120888;
+            };
             onActivation.cleanup = "zap";
           };
 
