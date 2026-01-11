@@ -82,6 +82,7 @@
               "sf-symbols"
               "pearcleaner"
               "onlyoffice"
+              "free-download-manager"
             ];
             brews = [
               "yabai"

@@ -1,26 +1,26 @@
 
 # App shortcuts 
-alt - b : open -a 'Zen'
+alt - b : open -a 'Arc'
 alt - t : open -a 'kitty'
 # alt - m : open -a 'Music'
-alt - w : open -a 'Arc'; open -a 'WezTerm'; open -a 'AFFiNE'
+alt - w : open -a 'Arc'; open -a 'kitty'
 # change window focus within space
-# alt - j : yabai -m window --focus south
-# alt - k : yabai -m window --focus north
-# alt - h : yabai -m window --focus west
-# alt - l : yabai -m window --focus east
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
 
 # rotate layout clockwise
-# shift + alt - r : yabai -m space --rotate 270
+shift + alt - r : yabai -m space --rotate 270
 
 # swap window
-# shift+ alt - h : yabai -m window --warp west
-# shift+ alt - l : yabai -m window --warp east
-# shift+ alt - k : yabai -m window --warp north
-# shift+ alt - j : yabai -m window --warp south
+shift+ alt - h : yabai -m window --warp west
+shift+ alt - l : yabai -m window --warp east
+shift+ alt - k : yabai -m window --warp north
+shift+ alt - j : yabai -m window --warp south
 
 # toggle window zoom
-# alt - f : yabai -m window --toggle zoom-fullscreen
+alt - f : yabai -m window --toggle zoom-fullscreen
 
 
 # create desktop, move window and follow focus - uses jq for parsing json (ibrew install jq)
