@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "BarutSRB-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768287961,
+        "narHash": "sha256-xYoS03aOYYNxqBg2+UGlNLoAbBYOHQcmQO7Rw9nA3/s=",
+        "owner": "BarutSRB",
+        "repo": "homebrew-tap",
+        "rev": "d1381f7d58cc329f0c0b29a885d2cab4e05bbdf6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BarutSRB",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "FelixKratz-formulae": {
       "flake": false,
       "locked": {
@@ -13,6 +29,22 @@
       "original": {
         "owner": "FelixKratz",
         "repo": "homebrew-formulae",
+        "type": "github"
+      }
+    },
+    "aerospace-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767556899,
+        "narHash": "sha256-UXqidzDPZk30+KXaapZo7U33Cfwmaef7knwDO26Wa4c=",
+        "owner": "nikitabobko",
+        "repo": "homebrew-tap",
+        "rev": "3806a446c6c4c6962d8790187ccdbd2bdbdebb5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nikitabobko",
+        "repo": "homebrew-tap",
         "type": "github"
       }
     },
@@ -171,7 +203,9 @@
     },
     "root": {
       "inputs": {
+        "BarutSRB-tap": "BarutSRB-tap",
         "FelixKratz-formulae": "FelixKratz-formulae",
+        "aerospace-tap": "aerospace-tap",
         "asmvik-formulae": "asmvik-formulae",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",

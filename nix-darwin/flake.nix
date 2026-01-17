@@ -23,6 +23,14 @@
       url = "github:FelixKratz/homebrew-formulae";
       flake = false;
     };
+    BarutSRB-tap = {
+      url = "github:BarutSRB/homebrew-tap";
+      flake = false;
+    };
+    aerospace-tap = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -36,6 +44,8 @@
       asmvik-formulae,
       FelixKratz-formulae,
       home-manager,
+      BarutSRB-tap,
+      aerospace-tap,
     }:
     let
       configuration =
@@ -64,6 +74,7 @@
             pkgs.eza
             pkgs.fastfetch
             pkgs.gh
+            pkgs.neofetch
           ];
 
           system.primaryUser = "antsajudicael";
@@ -83,12 +94,18 @@
               "pearcleaner"
               "onlyoffice"
               "free-download-manager"
+              "font-cascadia-code"
+              "httpie-desktop"
+              "omniwm"
+              "aerospace"
             ];
             brews = [
               "yabai"
               "skhd"
               "sketchybar"
               "mas"
+              "ollama"
+              "httpie"
             ];
             masApps = {
               "CleanMyKeyboard" = 6468120888;
@@ -164,6 +181,8 @@
                 "homebrew/homebrew-cask" = homebrew-cask;
                 "asmvik/homebrew-formulae" = asmvik-formulae;
                 "FelixKratz/homebrew-formulae" = FelixKratz-formulae;
+                "BarutSRB/homebrew-tap" = BarutSRB-tap;
+                "nikitabobko/homebrew-tap" = aerospace-tap;
               };
 
               # Optional: Enable fully-declarative tap management
