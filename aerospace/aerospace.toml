@@ -44,7 +44,7 @@ on-focus-changed = ['move-mouse window-lazy-center']
     inner.vertical =   20
     outer.left =       20
     outer.bottom =     20
-    outer.top  = [{ monitor.main = 50 }, { monitor."some-pattern" = 32 }, 20]
+    outer.top  = [{ monitor.main = 20 }, { monitor."some-pattern" = 32 }, 20]
     outer.right =      20
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
@@ -168,6 +168,15 @@ alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
     run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
-if.app-id = 'com.apple.weather'
-run = ['layout floating']
+    if.app-id = 'net.kovidgoyal.kitty'
+    run = "move-node-to-workspace 2"
+
+
+[[on-window-detected]]
+    if.app-id = 'pro.affine.app'
+    run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.weather'
+    run = "layout floating"
 
