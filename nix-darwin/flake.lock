@@ -201,6 +201,22 @@
         "type": "github"
       }
     },
+    "paneru": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771434354,
+        "narHash": "sha256-xaFw4yffvc1fey6XQXgAf4KK5zBJWrAdHoMKZoK6Nz0=",
+        "owner": "karinushka",
+        "repo": "paneru",
+        "rev": "e9cfe7f9a571c191a4fee56fa43a7bfc41458e79",
+        "type": "github"
+      },
+      "original": {
+        "owner": "karinushka",
+        "repo": "paneru",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "BarutSRB-tap": "BarutSRB-tap",
@@ -212,7 +228,8 @@
         "homebrew-core": "homebrew-core",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "paneru": "paneru"
       }
     }
   },

@@ -19,9 +19,13 @@ end
 
 ---Colorscheme
 config.color_scheme = scheme_for_appearance(get_appearance())
-config.font = wezterm.font("MonoLisa", { weight = "Medium" })
+-- config.font = wezterm.font("MonoLisa", { weight = "Medium" })
+config.font = wezterm.font_with_fallback {
+    -- { family = 'MonoLisa',         weight = 'Medium', style = 'Regular' },
+    { family = 'MonoLisa Cursive', weight = 'Medium', style = 'Italic' },
+}
 config.font_size = 25
-config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
+-- config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
 config.colors = {
     cursor_bg = "lightgreen",
     cursor_border = "green",

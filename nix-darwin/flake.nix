@@ -31,6 +31,14 @@
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
     };
+    paneru = {
+      url = "github:karinushka/paneru";
+      flake = false;
+    };
+    # lgug2z-tap = {
+    #   url = "github:lgug2z/homebrew-tap";
+    #   flake = false;
+    # };
   };
 
   outputs =
@@ -46,6 +54,8 @@
       home-manager,
       BarutSRB-tap,
       aerospace-tap,
+      paneru,
+    # lgug2z-tap,
     }:
     let
       configuration =
@@ -60,6 +70,7 @@
             pkgs.btop
             pkgs.git
             pkgs.kitty
+            pkgs.wezterm
             pkgs.neovim
             pkgs.tmux
             pkgs.fzf
@@ -75,6 +86,8 @@
             pkgs.fastfetch
             pkgs.gh
             pkgs.neofetch
+            pkgs.mongodb
+            pkgs.mongodb-compass
           ];
 
           system.primaryUser = "antsajudicael";
@@ -98,6 +111,7 @@
               "httpie-desktop"
               "omniwm"
               "aerospace"
+              "font-symbols-only-nerd-font"
             ];
             brews = [
               "yabai"
@@ -106,6 +120,9 @@
               "mas"
               "ollama"
               "httpie"
+              "fontforge"
+              "fonttools"
+              # "komorebi-for-mac"
             ];
             masApps = {
               "CleanMyKeyboard" = 6468120888;
@@ -153,7 +170,6 @@
 
           # The platform the configuration will be used on.
           nixpkgs.hostPlatform = "aarch64-darwin";
-
         };
     in
     {
@@ -182,6 +198,7 @@
                 "asmvik/homebrew-formulae" = asmvik-formulae;
                 "FelixKratz/homebrew-formulae" = FelixKratz-formulae;
                 "BarutSRB/homebrew-tap" = BarutSRB-tap;
+                # "lgug2z/homebrew-tap" = lgug2z-tap;
                 "nikitabobko/homebrew-tap" = aerospace-tap;
               };
 

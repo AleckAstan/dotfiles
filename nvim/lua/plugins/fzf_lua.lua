@@ -23,6 +23,7 @@ return {
                 },
             },
             files = {
+                formatter = "path.filename_first",
                 previewer = "builtin",
                 fd_opts =
                 "--type f --hidden --exclude .git --exclude node_modules --exclude dist --exclude .next --strip-cwd-prefix",
@@ -44,10 +45,12 @@ return {
                 ["--layout"] = "reverse",
             },
             grep = {
+                formatter = "path.filename_first",
                 rg_opts =
                 "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=512 --glob '!**/{.git,node_modules,dist,.next}/*'",
             },
             buffers = {
+                formatter = "path.filename_first",
                 winopts = {
                     height = 0.9,
                     width = 0.9,
@@ -57,6 +60,7 @@ return {
                 },
             },
             oldfiles = {
+                formatter = "path.filename_first",
                 winopts = {
                     height = 0.9,
                     width = 0.9,

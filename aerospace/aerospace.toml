@@ -1,14 +1,14 @@
 after-login-command = []
-after-startup-command = [
-    'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
-]
+# after-startup-command = [
+#     'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
+# ]
 exec-on-workspace-change = [
     '/bin/bash',
     '-c',
     '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
 ]
 
-start-at-login = true
+start-at-login = false
 enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = false
 accordion-padding = 20
@@ -22,6 +22,7 @@ key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = ['move-mouse window-lazy-center']
 
+
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -29,22 +30,24 @@ on-focus-changed = ['move-mouse window-lazy-center']
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-# [workspace-to-monitor-force-assignment]
-# 1 = 'main'
-# 2 = 'main'
-# 3 = 'V32UE'
-# 4 = 'V32UE'
-# 5 = 'V32UE'
-# 6 = '^27W'
-# 7 = '^27W'
-# 10 = '^EPSON'
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+6 = 'main'
+7 = 'main'
+8 = '^Built-in Retina Display'
+9 = '^Built-in Retina Display'
+10 = '^Built-in Retina Display'
 
 [gaps]
     inner.horizontal = 20
     inner.vertical =   20
     outer.left =       20
     outer.bottom =     20
-    outer.top  = [{ monitor.main = 20 }, { monitor."some-pattern" = 32 }, 20]
+    outer.top  = [{ monitor."VA2962-HD" = 20 }, 20]
     outer.right =      20
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
@@ -106,6 +109,7 @@ alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 10'
+alt-f = ['fullscreen', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
