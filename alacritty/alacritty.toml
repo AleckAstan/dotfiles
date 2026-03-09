@@ -2,8 +2,8 @@ general.import = [
 # "./tokyo-night.toml",
     "./everforest_color.toml"
 ]
-
 [cursor]
+
 # Set to false to disable completely
 smooth_motion = true
 # 0.0 = cursor is not moving, 1.0 = cursor moves instantly
@@ -26,7 +26,7 @@ text = "0xff0000"
 cursor = "0xff0000"
 
 [font]
-size = 25.0
+size = 20.0
 
 [font.bold]
 family = "MonoLisa"

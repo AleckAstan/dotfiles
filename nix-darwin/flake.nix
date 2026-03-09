@@ -6,6 +6,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -46,6 +47,7 @@
       self,
       nix-darwin,
       nixpkgs,
+      neovim-nightly-overlay,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
@@ -61,6 +63,7 @@
       configuration =
         { pkgs, ... }:
         {
+          nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
           nixpkgs.config.allowUnfree = true;
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
@@ -86,8 +89,9 @@
             pkgs.fastfetch
             pkgs.gh
             pkgs.neofetch
-            pkgs.mongodb
-            pkgs.mongodb-compass
+            pkgs.go
+            # pkgs.mongodb
+            # pkgs.mongodb-compass
           ];
 
           system.primaryUser = "antsajudicael";
