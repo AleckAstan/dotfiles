@@ -1,9 +1,10 @@
 general.import = [
 # "./tokyo-night.toml",
-    "./everforest_color.toml"
+    # "./everforest_color.toml"
+    # "./ayu_light.toml"
+    "./ayu_dark.toml"
 ]
 [cursor]
-
 # Set to false to disable completely
 smooth_motion = true
 # 0.0 = cursor is not moving, 1.0 = cursor moves instantly
@@ -26,7 +27,7 @@ text = "0xff0000"
 cursor = "0xff0000"
 
 [font]
-size = 20.0
+size = 18.0
 
 [font.bold]
 family = "MonoLisa"
@@ -43,11 +44,15 @@ style = "Regular"
 hide_when_typing = false
 
 [window]
-opacity = 1
+opacity = 0.9
 blur = true
-decorations = "Buttonless"
+decorations = "None"
 
 [window.padding]
 x = 0
 y = 0
 
+
+[keyboard]
+bindings = [
+{key = "L", mods = "Command", action = "ToggleSimpleFullscreen"}]

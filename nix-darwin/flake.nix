@@ -6,7 +6,6 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -28,18 +27,6 @@
       url = "github:BarutSRB/homebrew-tap";
       flake = false;
     };
-    aerospace-tap = {
-      url = "github:nikitabobko/homebrew-tap";
-      flake = false;
-    };
-    paneru = {
-      url = "github:karinushka/paneru";
-      flake = false;
-    };
-    # lgug2z-tap = {
-    #   url = "github:lgug2z/homebrew-tap";
-    #   flake = false;
-    # };
   };
 
   outputs =
@@ -47,7 +34,6 @@
       self,
       nix-darwin,
       nixpkgs,
-      neovim-nightly-overlay,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
@@ -55,18 +41,15 @@
       FelixKratz-formulae,
       home-manager,
       BarutSRB-tap,
-      aerospace-tap,
-      paneru,
+      # aerospace-tap,
+      # paneru,
     # lgug2z-tap,
     }:
     let
       configuration =
         { pkgs, ... }:
         {
-          nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
           nixpkgs.config.allowUnfree = true;
-          # List packages installed in system profile. To search by name, run:
-          # $ nix-env -qaP | grep wget
           environment.systemPackages = [
             pkgs.obsidian
             pkgs.nixfmt-rfc-style
@@ -74,7 +57,6 @@
             pkgs.git
             pkgs.kitty
             pkgs.wezterm
-            pkgs.neovim
             pkgs.tmux
             pkgs.fzf
             pkgs.ripgrep
@@ -88,10 +70,10 @@
             pkgs.eza
             pkgs.fastfetch
             pkgs.gh
-            pkgs.neofetch
             pkgs.go
-            # pkgs.mongodb
-            # pkgs.mongodb-compass
+            pkgs.zed-editor
+            pkgs.mongodb-compass
+            pkgs.mongodb-tools
           ];
 
           system.primaryUser = "antsajudicael";
@@ -116,6 +98,9 @@
               "omniwm"
               "aerospace"
               "font-symbols-only-nerd-font"
+              "orbstack"
+              "hiddenbar"
+              "google-chrome"
             ];
             brews = [
               "yabai"
@@ -126,10 +111,13 @@
               "httpie"
               "fontforge"
               "fonttools"
+              "gemini-cli"
+              "neovim"
+              "aider"
               # "komorebi-for-mac"
             ];
             masApps = {
-              "CleanMyKeyboard" = 6468120888;
+              # "CleanMyKeyboard" = 6468120888;
             };
             onActivation.cleanup = "zap";
           };
@@ -152,7 +140,7 @@
             trackpad.TrackpadRightClick = true;
             loginwindow.GuestEnabled = false;
             # NSGlobalDomain."com.apple.swipescrolldirection" = true;
-            NSGlobalDomain._HIHideMenuBar = true;
+            NSGlobalDomain._HIHideMenuBar = false;
             NSGlobalDomain.AppleICUForce24HourTime = true;
             NSGlobalDomain.AppleInterfaceStyle = "Dark";
             WindowManager.StandardHideDesktopIcons = true;
@@ -202,13 +190,8 @@
                 "asmvik/homebrew-formulae" = asmvik-formulae;
                 "FelixKratz/homebrew-formulae" = FelixKratz-formulae;
                 "BarutSRB/homebrew-tap" = BarutSRB-tap;
-                # "lgug2z/homebrew-tap" = lgug2z-tap;
-                "nikitabobko/homebrew-tap" = aerospace-tap;
               };
 
-              # Optional: Enable fully-declarative tap management
-              #
-              # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
               mutableTaps = false;
             };
           }

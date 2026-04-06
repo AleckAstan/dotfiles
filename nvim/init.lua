@@ -34,7 +34,7 @@ vim.opt.pumblend = 10 -- popup menu transparency
 vim.opt.winblend = 0 -- floating window transparency
 vim.opt.conceallevel = 0 -- do not hide markup
 vim.opt.concealcursor = "" -- do not hide cursorline in markup
-vim.opt.lazyredraw = true -- do not redraw during macros
+vim.opt.lazyredraw = false -- do not redraw during macros
 vim.opt.synmaxcol = 300 -- syntax highlighting limit
 vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 
@@ -60,7 +60,7 @@ vim.opt.hidden = true -- allow hidden buffers
 vim.opt.errorbells = false -- no error sounds
 vim.opt.backspace = "indent,eol,start" -- better backspace behaviour
 vim.opt.autochdir = false -- do not autochange directories
-vim.opt.iskeyword:append("-") -- include - in words
+-- vim.opt.iskeyword:append("-") -- include - in words
 vim.opt.path:append("**") -- include subdirs in search
 vim.opt.selection = "inclusive" -- include last char in selection
 vim.opt.mouse = "a" -- enable mouse support
@@ -88,7 +88,7 @@ vim.opt.maxmempattern = 20000 -- increase max memory
 vim.g.mapleader = " " -- space for leader
 vim.g.maplocalleader = " " -- space for localleader
 
-vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+-- vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
 
@@ -238,6 +238,10 @@ vim.pack.add({
 	"https://github.com/supermaven-inc/supermaven-nvim",
 	"https://github.com/windwp/nvim-ts-autotag",
 	"https://github.com/AleckAstan/bearded-nvim",
+	"https://github.com/folke/noice.nvim",
+	"https://github.com/MunifTanjim/nui.nvim",
+	"https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
+        "https://github.com/MeanderingProgrammer/render-markdown.nvim",
 })
 
 local function packadd(name)
@@ -259,12 +263,28 @@ packadd("git-conflict.nvim")
 packadd("supermaven-nvim")
 packadd("nvim-ts-autotag")
 packadd("bearded-nvim")
+packadd("noice.nvim")
+packadd("nui.nvim")
+packadd("nvim-ts-context-commentstring")
+packadd("render-markdown.nvim")
 
 local setup_colorscheme = function()
-	vim.cmd.colorscheme("bearded")
+	require("bearded").setup({
+		flavor = "arc", -- see flavor list below
+		transparent = true,
+		bold = true,
+		italic = true,
+		dim_inactive = false,
+		terminal_colors = true,
+		on_highlights = function(set, palette, opts)
+			set("Normal", { fg = palette.ui.default })
+		end,
+	})
+	vim.cmd.colorscheme("bearded-altica")
 end
 
 setup_colorscheme()
+
 local setup_treesitter = function()
 	local treesitter = require("nvim-treesitter")
 	treesitter.setup({
@@ -318,12 +338,45 @@ setup_treesitter()
 
 require("flash").setup({})
 
+require("render-markdown").setup({})
+
 require("nvim-ts-autotag").setup({})
+require("noice").setup({
+	cmdline = {
+		view = "cmdline", -- Affiche la commande en bas, mais de façon stylée
+	},
+	lsp = {
+		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+		override = {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+		},
+	},
+	-- you can enable a preset for easier configuration
+	presets = {
+		bottom_search = true, -- use a classic bottom cmdline for search
+		command_palette = true, -- position the cmdline and popupmenu together
+		long_message_to_split = true, -- long messages will be sent to a split
+		inc_rename = false, -- enables an input dialog for inc-rename.nvim
+		lsp_doc_border = false, -- add a border to hover docs and signature help
+	},
+})
+
+vim.g.skip_ts_context_commentstring_module = true
+require("ts_context_commentstring").setup({
+	enable_autocmd = false,
+})
+
 require("fzf-lua").setup({})
 
 vim.keymap.set("n", "<leader>sf", function()
 	require("fzf-lua").files()
 end, { desc = "FZF Files" })
+
+vim.keymap.set("n", "<leader>sD", function()
+	require("fzf-lua").lsp_workspace_diagnostics()
+end)
 
 vim.keymap.set("n", "<leader>sg", function()
 	require("fzf-lua").live_grep()
@@ -346,7 +399,13 @@ require("yazi").setup({})
 vim.keymap.set("n", "<leader>e", "<Cmd>Yazi<CR>")
 
 require("mini.ai").setup({})
-require("mini.comment").setup({})
+require("mini.comment").setup({
+	options = {
+		custom_commentstring = function()
+			return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+		end,
+	},
+})
 require("mini.move").setup({})
 require("mini.surround").setup({})
 require("mini.cursorword").setup({})
@@ -354,7 +413,7 @@ require("mini.indentscope").setup({})
 require("mini.pairs").setup({})
 require("mini.trailspace").setup({})
 require("mini.bufremove").setup({})
-require("mini.notify").setup({})
+-- require("mini.notify").setup({})
 require("mini.icons").setup({})
 
 require("diffview").setup({
@@ -429,7 +488,7 @@ vim.diagnostic.config({
 		source = "always",
 		header = "",
 		prefix = "",
-		focusable = false,
+		focusable = true,
 		style = "minimal",
 	},
 })
@@ -456,7 +515,17 @@ local function lsp_on_attach(ev)
 		require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
 	end, opts)
 
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	vim.keymap.set("n", "<leader>ca", function()
+		require("fzf-lua").lsp_code_actions({
+			winopts = {
+				relative = "cursor",
+				row = 1,
+				col = 0,
+				height = 0.4,
+				width = 0.6,
+			},
+		})
+	end, opts)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 	vim.keymap.set("n", "<leader>D", function()
@@ -501,6 +570,22 @@ local function lsp_on_attach(ev)
 	vim.keymap.set("n", "<leader>th", function()
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }))
 	end, { desc = "Toggle Inlay Hints" })
+
+	vim.keymap.set("n", "<leader>d", function()
+		vim.diagnostic.open_float({
+			scope = "cursor",
+			focusable = true,
+			border = "rounded",
+		})
+	end, opts)
+
+	vim.keymap.set("n", "[d", function()
+		vim.diagnostic.goto_prev({ float = { border = "rounded", focusable = true } })
+	end, opts)
+
+	vim.keymap.set("n", "]d", function()
+		vim.diagnostic.goto_next({ float = { border = "rounded", focusable = true } })
+	end, opts)
 
 	if client:supports_method("textDocument/codeAction", bufnr) then
 		vim.keymap.set("n", "<leader>oi", function()
@@ -557,6 +642,10 @@ vim.lsp.config("lua_ls", {
 vim.lsp.config("vtsls", {
 	settings = {
 		typescript = {
+			preferences = {
+				importModuleSpecifierEnding = "minimal",
+				importModuleSpecifier = "non-relative",
+			},
 			inlayHints = {
 				parameterNames = { enabled = "all" },
 				parameterTypes = { enabled = true },
