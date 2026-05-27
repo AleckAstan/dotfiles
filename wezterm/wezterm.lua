@@ -8,37 +8,36 @@ local function get_appearance()
 	return "Dark"
 end
 
-config.colors = { background = "black" }
--- local function scheme_for_appearance(appearance)
--- 	if appearance:find("Dark") then
--- 		-- return "Ef-Deuteranopia-Dark"
--- 		return "tokyonight"
--- 	else
--- 	end
--- 	return "Edge Light (base16)"
--- end
+local function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		-- return "ayu"
+		return "Omni (Gogh)"
+	else
+		return "Edge Light (base16)"
+	end
+end
 
 ---Colorscheme
--- config.color_scheme = scheme_for_appearance(get_appearance())
--- config.font = wezterm.font("MonoLisa", { weight = "Medium" })
-config.font = wezterm.font_with_fallback({
-	{ family = "MonoLisa", weight = "Medium" },
-	{ family = "MonoLisa Cursive", weight = "Medium", style = "Italic" },
-})
+config.color_scheme = scheme_for_appearance(get_appearance())
+config.font = wezterm.font("MonoLisa")
+-- config.font = wezterm.font_with_fallback({
+-- 	{ family = "MonoLisa", weight = "Medium" },
+-- })
 config.font_size = 18
--- config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
+config.harfbuzz_features = { "ss02", "zero", "ss08", "ss07", "ss09" }
 config.colors = {
 	cursor_bg = "lightgreen",
 	cursor_border = "green",
 }
+-- config.colors = { background = "black" }
 
 ---Appearance
-config.window_decorations = "RESIZE"
-config.window_background_opacity = 1
+config.window_background_opacity = 0.9
 config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "RESIZE"
 config.window_padding = {
-	left = 25,
-	right = 15,
+	left = 0,
+	right = 0,
 	top = 0,
 	bottom = 0,
 }

@@ -1,8 +1,8 @@
 general.import = [
 # "./tokyo-night.toml",
     # "./everforest_color.toml"
-    # "./ayu_light.toml"
-    "./ayu_dark.toml"
+    "./ayu_light.toml"
+    # "./ayu_dark.toml"
 ]
 [cursor]
 # Set to false to disable completely
@@ -38,7 +38,7 @@ family = "MonoLisa Cursive"
 
 [font.normal]
 family = "MonoLisa"
-style = "Regular"
+# style = "Regular"
 
 [mouse]
 hide_when_typing = false
@@ -46,11 +46,11 @@ hide_when_typing = false
 [window]
 opacity = 0.9
 blur = true
-decorations = "None"
+decorations = "Buttonless"
 
 [window.padding]
-x = 0
-y = 0
+x = 10
+y = 10
 
 
 [keyboard]

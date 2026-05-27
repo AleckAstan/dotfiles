@@ -93,3 +93,6 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 set -gx PATH $PATH /Users/antsajudicael/.lmstudio/bin
 # End of LM Studio CLI section
 
+
+# opencode
+fish_add_path /Users/antsajudicael/.opencode/bin

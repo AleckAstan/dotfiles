@@ -1,12 +1,12 @@
-theme = dark:ayu, light:ayu_light
+theme = dark:ayu_light, light:ayu_light
 font-family = "MonoLisa"
 font-style = "Medium"
 font-style-bold = "Bold"
 font-style-italic = "Medium Italic"
 font-style-bold-italic = "Bold Italic"
-font-size = 25
+font-size = 16
 font-feature=ss02,zero,ss08,ss07,ss09
-background-opacity = 0.8
+background-opacity = 1.00
 background-blur-radius = 80
 macos-titlebar-style = "hidden"      
 window-decoration   = "auto"

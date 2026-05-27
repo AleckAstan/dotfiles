@@ -27,6 +27,14 @@
       url = "github:BarutSRB/homebrew-tap";
       flake = false;
     };
+    aerospace-tap = {
+        url = "github:nikitabobko/homebrew-tap";
+        flake = false;
+      };
+    aerospace-bar-tap = {
+      url = "github:rdrkr/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -41,7 +49,8 @@
       FelixKratz-formulae,
       home-manager,
       BarutSRB-tap,
-      # aerospace-tap,
+      aerospace-tap,
+      aerospace-bar-tap,
       # paneru,
     # lgug2z-tap,
     }:
@@ -101,9 +110,11 @@
               "orbstack"
               "hiddenbar"
               "google-chrome"
+              "yashiki"
+              "aerospacebar"
             ];
             brews = [
-              "yabai"
+              #"yabai"
               "skhd"
               "sketchybar"
               "mas"
@@ -114,6 +125,8 @@
               "gemini-cli"
               "neovim"
               "aider"
+              "borders"
+              #"qwen-code"
               # "komorebi-for-mac"
             ];
             masApps = {
@@ -190,6 +203,8 @@
                 "asmvik/homebrew-formulae" = asmvik-formulae;
                 "FelixKratz/homebrew-formulae" = FelixKratz-formulae;
                 "BarutSRB/homebrew-tap" = BarutSRB-tap;
+                "nikitabobko/homebrew-tap" = aerospace-tap;
+                "rdrkr/homebrew-tap" = aerospace-bar-tap;
               };
 
               mutableTaps = false;

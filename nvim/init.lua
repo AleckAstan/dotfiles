@@ -241,7 +241,7 @@ vim.pack.add({
 	"https://github.com/folke/noice.nvim",
 	"https://github.com/MunifTanjim/nui.nvim",
 	"https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
-        "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 })
 
 local function packadd(name)
@@ -280,7 +280,7 @@ local setup_colorscheme = function()
 			set("Normal", { fg = palette.ui.default })
 		end,
 	})
-	vim.cmd.colorscheme("bearded-altica")
+	vim.cmd.colorscheme("bearded-classics-light")
 end
 
 setup_colorscheme()
@@ -402,7 +402,13 @@ require("mini.ai").setup({})
 require("mini.comment").setup({
 	options = {
 		custom_commentstring = function()
-			return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+			local status, ts_comment = pcall(function()
+				return require("ts_context_commentstring.internal").calculate_commentstring()
+			end)
+			if status and ts_comment then
+				return ts_comment
+			end
+			return vim.bo.commentstring
 		end,
 	},
 })
@@ -444,22 +450,22 @@ vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 require("mason").setup({})
 
-require("supermaven-nvim").setup({
-	keymaps = {
-		accept_suggestion = "<Tab>",
-		clear_suggestion = "<C-]>",
-		accept_word = "<C-j>",
-	},
-	ignore_filetypes = {}, -- Add filetypes to ignore if needed
-	color = {
-		suggestion_color = "#808080",
-		cterm = 244,
-	},
-	log_level = "info", -- set to "off" to disable logging completely
-	disable_inline_completion = false, -- enable inline completion when not using cmp
-	disable_keymaps = false, -- disable built-in keymaps for manual control
-	-- end,
-})
+-- require("supermaven-nvim").setup({
+-- 	keymaps = {
+-- 		accept_suggestion = "<Tab>",
+-- 		clear_suggestion = "<C-]>",
+-- 		accept_word = "<C-j>",
+-- 	},
+-- 	ignore_filetypes = {}, -- Add filetypes to ignore if needed
+-- 	color = {
+-- 		suggestion_color = "#808080",
+-- 		cterm = 244,
+-- 	},
+-- 	log_level = "info", -- set to "off" to disable logging completely
+-- 	disable_inline_completion = false, -- enable inline completion when not using cmp
+-- 	disable_keymaps = false, -- disable built-in keymaps for manual control
+-- 	-- end,
+-- })
 -- ============================================================================
 -- LSP, Linting, Formatting & Completion
 -- ============================================================================
