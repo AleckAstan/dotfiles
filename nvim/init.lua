@@ -46,8 +46,8 @@ then
 end
 
 vim.opt.backup = false -- do not create a backup file
-vim.opt.writebackup = false -- do not write to a backup file
-vim.opt.swapfile = false -- do not create a swapfile
+vim.opt.writebackup = true -- protect files while they are being written
+vim.opt.swapfile = true -- preserve unsaved changes after a crash
 vim.opt.undofile = true -- do create an undo file
 vim.opt.undodir = undodir -- set the undo directory
 vim.opt.updatetime = 300 -- faster completion
@@ -170,6 +170,36 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+-- Format schema.prisma on save with the Prisma CLI (formats in place, so reload)
+vim.api.nvim_create_autocmd("BufWritePost", {
+	group = augroup,
+	pattern = "*.prisma",
+	callback = function(args)
+		if vim.bo[args.buf].buftype ~= "" or not vim.bo[args.buf].modifiable then
+			return
+		end
+		local path = vim.api.nvim_buf_get_name(args.buf)
+		if path == "" then
+			return
+		end
+
+		vim.fn.system({ "npx", "prisma", "format", "--schema", path })
+		if vim.v.shell_error ~= 0 then
+			return
+		end
+
+		local win = vim.api.nvim_get_current_win()
+		local is_current = vim.api.nvim_get_current_buf() == args.buf
+		local cursor = is_current and vim.api.nvim_win_is_valid(win) and vim.api.nvim_win_get_cursor(win) or nil
+		vim.api.nvim_buf_call(args.buf, function()
+			vim.cmd("silent edit!")
+		end)
+		if cursor then
+			pcall(vim.api.nvim_win_set_cursor, win, cursor)
+		end
+	end,
+})
+
 -- highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = augroup,
@@ -217,7 +247,7 @@ vim.pack.add({
 	"https://www.github.com/lewis6991/gitsigns.nvim",
 	"https://www.github.com/echasnovski/mini.nvim",
 	"https://www.github.com/ibhagwan/fzf-lua",
-	{ src = "https://github.com/mikavilpas/yazi.nvim", event = "VeryLazy" },
+	"https://github.com/mikavilpas/yazi.nvim",
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/folke/flash.nvim",
 	{
@@ -242,6 +272,8 @@ vim.pack.add({
 	"https://github.com/MunifTanjim/nui.nvim",
 	"https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
 	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
+	"https://github.com/prisma/vim-prisma",
+	"https://github.com/yelog/i18n.nvim",
 })
 
 local function packadd(name)
@@ -267,6 +299,8 @@ packadd("noice.nvim")
 packadd("nui.nvim")
 packadd("nvim-ts-context-commentstring")
 packadd("render-markdown.nvim")
+packadd("vim-prisma")
+packadd("i18n.nvim")
 
 local setup_colorscheme = function()
 	require("bearded").setup({
@@ -280,7 +314,7 @@ local setup_colorscheme = function()
 			set("Normal", { fg = palette.ui.default })
 		end,
 	})
-	vim.cmd.colorscheme("bearded-classics-light")
+	vim.cmd.colorscheme("bearded-arc-blueberry")
 end
 
 setup_colorscheme()
@@ -305,7 +339,6 @@ local setup_treesitter = function()
 		"typescript",
 		"tsx",
 		"bash",
-		"lua",
 	}
 
 	local config = require("nvim-treesitter.config")
@@ -350,7 +383,6 @@ require("noice").setup({
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 			["vim.lsp.util.stylize_markdown"] = true,
-			["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 		},
 	},
 	-- you can enable a preset for easier configuration
@@ -449,6 +481,10 @@ require("gitsigns").setup({
 vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 require("mason").setup({})
+require("i18n").setup({
+	-- locales= {'fr','en'}
+	auto_detect = true,
+})
 
 -- require("supermaven-nvim").setup({
 -- 	keymaps = {
@@ -537,9 +573,6 @@ local function lsp_on_attach(ev)
 	vim.keymap.set("n", "<leader>D", function()
 		vim.diagnostic.open_float({ scope = "line" })
 	end, opts)
-	vim.keymap.set("n", "<leader>d", function()
-		vim.diagnostic.open_float({ scope = "cursor" })
-	end, opts)
 	vim.keymap.set("n", "<leader>nd", function()
 		vim.diagnostic.jump({ count = 1 })
 	end, opts)
@@ -586,11 +619,11 @@ local function lsp_on_attach(ev)
 	end, opts)
 
 	vim.keymap.set("n", "[d", function()
-		vim.diagnostic.goto_prev({ float = { border = "rounded", focusable = true } })
+		vim.diagnostic.jump({ count = -1, float = { border = "rounded", focusable = true } })
 	end, opts)
 
 	vim.keymap.set("n", "]d", function()
-		vim.diagnostic.goto_next({ float = { border = "rounded", focusable = true } })
+		vim.diagnostic.jump({ count = 1, float = { border = "rounded", focusable = true } })
 	end, opts)
 
 	if client:supports_method("textDocument/codeAction", bufnr) then
@@ -684,7 +717,6 @@ do
 	local shfmt = require("efmls-configs.formatters.shfmt")
 
 	vim.lsp.config("efm", {
-		"css",
 		filetypes = {
 			"html",
 			"javascript",
