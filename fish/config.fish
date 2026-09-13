@@ -79,6 +79,7 @@ alias lt='eza -al --sort=modified'
 alias pull='git pull --rebase'
 alias push='git push'
 alias commit='git commit -m '
+alias python="python3"
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
@@ -96,3 +97,15 @@ set -gx PATH $PATH /Users/antsajudicael/.lmstudio/bin
 
 # opencode
 fish_add_path /Users/antsajudicael/.opencode/bin
+
+
+set -gx AVANTE_PROVIDER openai
+set -gx AVANTE_LOCAL_MODEL qwen3-coder:30b
+
+# Optional endpoint overrides
+set -gx OLLAMA_HOST http://127.0.0.1:11434
+set -gx LM_STUDIO_BASE_URL http://127.0.0.1:1234/v1
+
+# Only needed for OpenAI. Set the real key outside this tracked file with:
+# set -Ux OPENAI_API_KEY 
+set -gx AVANTE_OPENAI_MODEL gpt-4o-mini

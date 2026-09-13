@@ -243,6 +243,15 @@ vim.api.nvim_create_autocmd("FileType", {
 -- ============================================================================
 -- PLUGINS (vim.pack)
 -- ============================================================================
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = augroup,
+	callback = function(ev)
+		if ev.data.spec.name == "avante.nvim" and (ev.data.kind == "install" or ev.data.kind == "update") then
+			vim.system({ "make", "BUILD_FROM_SOURCE=true" }, { cwd = ev.data.path }):wait()
+		end
+	end,
+})
+
 vim.pack.add({
 	"https://www.github.com/lewis6991/gitsigns.nvim",
 	"https://www.github.com/echasnovski/mini.nvim",
@@ -274,6 +283,7 @@ vim.pack.add({
 	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 	"https://github.com/prisma/vim-prisma",
 	"https://github.com/yelog/i18n.nvim",
+	"https://github.com/yetone/avante.nvim",
 })
 
 local function packadd(name)
@@ -301,6 +311,7 @@ packadd("nvim-ts-context-commentstring")
 packadd("render-markdown.nvim")
 packadd("vim-prisma")
 packadd("i18n.nvim")
+packadd("avante.nvim")
 
 local setup_colorscheme = function()
 	require("bearded").setup({
@@ -314,7 +325,7 @@ local setup_colorscheme = function()
 			set("Normal", { fg = palette.ui.default })
 		end,
 	})
-	vim.cmd.colorscheme("bearded-arc-blueberry")
+	vim.cmd.colorscheme("bearded-classics-light")
 end
 
 setup_colorscheme()
@@ -371,7 +382,52 @@ setup_treesitter()
 
 require("flash").setup({})
 
-require("render-markdown").setup({})
+require("render-markdown").setup({
+	file_types = { "markdown", "Avante" },
+})
+
+local avante_provider = vim.env.AVANTE_PROVIDER or "ollama"
+local local_model = vim.env.AVANTE_LOCAL_MODEL or "qwen2.5-coder:7b"
+
+require("avante").setup({
+	provider = avante_provider,
+	selector = {
+		provider = "fzf_lua",
+	},
+	providers = {
+		openai = {
+			endpoint = vim.env.OPENAI_BASE_URL or "https://api.openai.com/v1",
+			api_key_name = "OPENAI_API_KEY",
+			model = vim.env.AVANTE_OPENAI_MODEL or "gpt-4o-mini",
+			timeout = 60000,
+		},
+		ollama = {
+			endpoint = vim.env.OLLAMA_HOST or "http://127.0.0.1:11434",
+			model = vim.env.AVANTE_OLLAMA_MODEL or local_model,
+			timeout = 120000,
+			is_env_set = require("avante.providers.ollama").check_endpoint_alive,
+			extra_request_body = {
+				options = {
+					num_ctx = 32768,
+				},
+			},
+		},
+		lmstudio = {
+			__inherited_from = "openai",
+			endpoint = vim.env.LM_STUDIO_BASE_URL or "http://127.0.0.1:1234/v1",
+			api_key_name = "",
+			model = vim.env.AVANTE_LMSTUDIO_MODEL or local_model,
+			timeout = 120000,
+			is_env_set = function()
+				return true
+			end,
+		},
+	},
+})
+
+vim.keymap.set({ "n", "v" }, "<leader>aa", "<Cmd>AvanteAsk<CR>", { desc = "Avante ask" })
+vim.keymap.set("n", "<leader>at", "<Cmd>AvanteToggle<CR>", { desc = "Avante toggle" })
+vim.keymap.set("n", "<leader>ap", "<Cmd>AvanteSwitchProvider<CR>", { desc = "Avante switch provider" })
 
 require("nvim-ts-autotag").setup({})
 require("noice").setup({
@@ -481,10 +537,114 @@ require("gitsigns").setup({
 vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 require("mason").setup({})
+
+local clicar_i18n_modules = {
+	"agency",
+	"alert",
+	"auth",
+	"booking-contract",
+	"client",
+	"client-material",
+	"client-typology",
+	"common",
+	"condition-report-accessory",
+	"driver",
+	"driver-planning",
+	"errors",
+	"head-office",
+	"kpi",
+	"maintenance-schedule",
+	"maintenance-type",
+	"role",
+	"sidebar",
+	"statistics",
+	"tracking",
+	"user",
+	"vehicle",
+	"vehicle-category",
+	"vehicle-immobilization",
+	"vehicle-maintenance",
+}
+
+local clicar_i18n_sources = vim.tbl_map(function(module)
+	local namespace = module:gsub("%-(%l)", string.upper)
+	return {
+		pattern = "src/locales/{locales}/" .. module .. ".json",
+		prefix = namespace .. ":",
+	}
+end, clicar_i18n_modules)
+
 require("i18n").setup({
-	-- locales= {'fr','en'}
-	auto_detect = true,
+	locales = { "fr", "en" },
+	sources = clicar_i18n_sources,
+	auto_detect = false,
+	namespace_resolver = "auto",
+	namespace_separator = ":",
+	i18n_keys = { popup_type = "fzf-lua" },
+	usage = { popup_type = "fzf-lua" },
 })
+
+-- Keep already-qualified i18next keys intact when useTranslation() is also in scope.
+local i18n_namespace = require("i18n.namespace")
+if not i18n_namespace._preserves_qualified_keys then
+	local resolve = i18n_namespace.resolve
+	local resolve_key_from_content = i18n_namespace.resolve_key_from_content
+
+	i18n_namespace.resolve = function(bufnr, key, line, col)
+		if key:find(":", 1, true) then
+			return key
+		end
+		return resolve(bufnr, key, line, col)
+	end
+
+	i18n_namespace.resolve_key_from_content = function(lines, key, line, filetype)
+		if key:find(":", 1, true) then
+			return key
+		end
+		return resolve_key_from_content(lines, key, line, filetype)
+	end
+
+	i18n_namespace._preserves_qualified_keys = true
+end
+
+-- I18nAddKey extracts raw keys on its own; reuse the namespace-aware extractor.
+local i18n_add_key = require("i18n.add_key")
+if not i18n_add_key._resolves_namespaces then
+	for index = 1, 20 do
+		local upvalue = debug.getupvalue(i18n_add_key.add_key_interactive, index)
+		if not upvalue then
+			break
+		end
+		if upvalue == "get_key_under_cursor" then
+			debug.setupvalue(i18n_add_key.add_key_interactive, index, function()
+				return require("i18n.display").get_key_under_cursor()
+			end)
+			i18n_add_key._resolves_namespaces = true
+			break
+		end
+	end
+end
+
+local function i18n_or_lsp_definition()
+	if require("i18n").i18n_definition() then
+		return
+	end
+	require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
+end
+
+local function i18n_or_lsp_hover()
+	local key = require("i18n.display").get_key_under_cursor()
+	if key and require("i18n").show_popup() then
+		return
+	end
+	vim.lsp.buf.hover()
+end
+
+vim.keymap.set("n", "gd", i18n_or_lsp_definition, { desc = "i18n or LSP definition" })
+vim.keymap.set("n", "K", i18n_or_lsp_hover, { desc = "i18n translations or LSP hover" })
+vim.keymap.set("n", "<leader>si", function()
+	require("i18n").i18n_keys()
+end, { desc = "FZF i18n keys" })
 
 -- require("supermaven-nvim").setup({
 -- 	keymaps = {
@@ -553,9 +713,12 @@ local function lsp_on_attach(ev)
 	local bufnr = ev.buf
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
-	vim.keymap.set("n", "gd", function()
-		require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
-	end, opts)
+	vim.keymap.set(
+		"n",
+		"gd",
+		i18n_or_lsp_definition,
+		vim.tbl_extend("force", opts, { desc = "i18n or LSP definition" })
+	)
 
 	vim.keymap.set("n", "<leader>ca", function()
 		require("fzf-lua").lsp_code_actions({
@@ -581,7 +744,12 @@ local function lsp_on_attach(ev)
 		vim.diagnostic.jump({ count = -1 })
 	end, opts)
 
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set(
+		"n",
+		"K",
+		i18n_or_lsp_hover,
+		vim.tbl_extend("force", opts, { desc = "i18n translations or LSP hover" })
+	)
 
 	vim.keymap.set("n", "<leader>fd", function()
 		require("fzf-lua").lsp_definitions({ jump_to_single_result = true })

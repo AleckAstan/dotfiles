@@ -4,6 +4,10 @@
       "rev": "dae4f5aaa3574bd0c2b9dd20fb9542a02c10471c",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
+    "avante.nvim": {
+      "rev": "9a7793461549939f1d52b2b309a1aa44680170c8",
+      "src": "https://github.com/yetone/avante.nvim"
+    },
     "bearded-nvim": {
       "rev": "77d01740de105ac2e6079dc305b6e91bfa1057cf",
       "src": "https://github.com/AleckAstan/bearded-nvim"
@@ -13,9 +17,21 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "codecompanion.nvim": {
+      "rev": "5e4f7cfac58c94c61d5a3d3a99d715d5c8762db6",
+      "src": "https://github.com/olimorris/codecompanion.nvim"
+    },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
+    },
+    "dressing.nvim": {
+      "rev": "2d7c2db2507fa3c4956142ee607431ddb2828639",
+      "src": "https://github.com/stevearc/dressing.nvim"
+    },
+    "edge": {
+      "rev": "7ec78c21bd8f0b2b0b47043bb1e730c561647c72",
+      "src": "https://github.com/sainnhe/edge"
     },
     "efmls-configs-nvim": {
       "rev": "0b0ca5462a0a9c1233cc8359e64741d7d49fbbe4",
@@ -61,6 +77,10 @@
       "rev": "2163c54bb6cfec53e3e555665ada945b8c8331b9",
       "src": "https://www.github.com/neovim/nvim-lspconfig"
     },
+    "nvim-tree.lua": {
+      "rev": "4b30847c91d498446cb8440c03031359b045e050",
+      "src": "https://www.github.com/nvim-tree/nvim-tree.lua"
+    },
     "nvim-treesitter": {
       "rev": "5cb05e1b0fa3c469958a2b26f36b3fe930af221c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -84,6 +104,10 @@
     "supermaven-nvim": {
       "rev": "07d20fce48a5629686aefb0a7cd4b25e33947d50",
       "src": "https://github.com/supermaven-inc/supermaven-nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
+      "src": "https://github.com/folke/tokyonight.nvim"
     },
     "vim-prisma": {
       "rev": "95c5b25066efb34c75bce78698baa371fe0ee7c2",

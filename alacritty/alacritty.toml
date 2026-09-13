@@ -1,7 +1,7 @@
 general.import = [
-# "./tokyo-night.toml",
+"./tokyo-night.toml",
     # "./everforest_color.toml"
-    "./ayu_light.toml"
+    # "./ayu_light.toml"
     # "./ayu_dark.toml"
 ]
 [cursor]
@@ -44,7 +44,7 @@ family = "MonoLisa"
 hide_when_typing = false
 
 [window]
-opacity = 0.9
+opacity = 0.8
 blur = true
 decorations = "Buttonless"
 

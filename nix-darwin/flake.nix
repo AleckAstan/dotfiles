@@ -6,6 +6,10 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    neru = {
+      url = "github:y3owk1n/neru";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -28,11 +32,15 @@
       flake = false;
     };
     aerospace-tap = {
-        url = "github:nikitabobko/homebrew-tap";
-        flake = false;
-      };
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
     aerospace-bar-tap = {
       url = "github:rdrkr/homebrew-tap";
+      flake = false;
+    };
+    rift-tap = {
+      url = "github:acsandmann/homebrew-tap";
       flake = false;
     };
   };
@@ -43,6 +51,7 @@
       nix-darwin,
       nixpkgs,
       nix-homebrew,
+      neru,
       homebrew-core,
       homebrew-cask,
       asmvik-formulae,
@@ -51,14 +60,29 @@
       BarutSRB-tap,
       aerospace-tap,
       aerospace-bar-tap,
+      rift-tap,
       # paneru,
-    # lgug2z-tap,
+      # lgug2z-tap,
     }:
     let
       configuration =
         { pkgs, ... }:
         {
           nixpkgs.config.allowUnfree = true;
+          nixpkgs.overlays = [ neru.overlays.default ];
+
+          services.neru = { 
+            enable=true;
+            settings={
+              recursive_grid = {
+                keys = "yuihjknm,";
+                hotkeys = {
+                  "Shift+D" = "action left_click --toggle";
+                };
+              };
+            };
+          };
+
           environment.systemPackages = [
             pkgs.obsidian
             pkgs.nixfmt-rfc-style
@@ -112,6 +136,7 @@
               "google-chrome"
               "yashiki"
               "aerospacebar"
+              "motrix"
             ];
             brews = [
               #"yabai"
@@ -125,7 +150,10 @@
               "gemini-cli"
               "neovim"
               "aider"
+              "llmfit"
               "borders"
+              "rift"
+              "tailscale"
               #"qwen-code"
               # "komorebi-for-mac"
             ];
@@ -182,6 +210,7 @@
       # $ darwin-rebuild build --flake .#mbp
       darwinConfigurations."mbp" = nix-darwin.lib.darwinSystem {
         modules = [
+          neru.darwinModules.default
           configuration
 
           nix-homebrew.darwinModules.nix-homebrew
@@ -205,6 +234,7 @@
                 "BarutSRB/homebrew-tap" = BarutSRB-tap;
                 "nikitabobko/homebrew-tap" = aerospace-tap;
                 "rdrkr/homebrew-tap" = aerospace-bar-tap;
+                "acsandmann/homebrew-tap" = rift-tap;
               };
 
               mutableTaps = false;
